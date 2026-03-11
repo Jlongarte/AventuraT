@@ -1,0 +1,109 @@
+.discover {
+  display: flex;
+  justify-content: space-between;
+}
+
+.discover > h2 {
+  text-align: left;
+}
+.trips-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+h2 > .red-color {
+  color: var(--main-color);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+/* Wrapper */
+.trip-card {
+  cursor: pointer;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.trip-card:hover {
+  transform: rotateZ(-1.5deg) translateY(-10px);
+}
+
+/* IMAGE */
+.image-wrapper {
+  border-radius: 22px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.trip-card:hover img {
+  transform: scale(1.14);
+}
+
+/* TEXT */
+.card-content {
+  margin-top: 16px;
+}
+
+.card-content h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 4px;
+}
+
+.card-content p {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ===============================
+             VERSIÓN TABLET 
+=============================== */
+
+@media (min-width: 768px) and (max-width: 1180px) {
+  .discover {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center !important;
+    margin-bottom: 40px;
+  }
+
+  .discover > h2 {
+    text-align: center;
+  }
+  .trips-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===============================
+   MOBILE — hasta 767px
+=============================== */
+@media (max-width: 767px) {
+  .discover {
+    align-items: center;
+  }
+  .discover > h2 {
+    text-align: center;
+  }
+.trips-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+  .discover .btn.primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+}
