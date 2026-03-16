@@ -12,7 +12,7 @@ const images = [
 ];
 
 const TravelPartners = () => {
-  const loopImages = [...images, ...images]; // duplicamos para loop perfecto
+  const loopImages = [...images, ...images]; 
 
   return (
     <section className="partners">
