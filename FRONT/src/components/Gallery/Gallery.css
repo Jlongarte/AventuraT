@@ -12,7 +12,6 @@
   gap: 20px;
 }
 
-/* Items */
 .gallery-item {
   position: relative;
   overflow: hidden;
@@ -26,12 +25,10 @@
   transition: transform 0.6s ease;
 }
 
-/* Hover zoom */
 .gallery-item:hover img {
   transform: scale(1.08);
 }
 
-/* Layout similar to your image */
 .item-1 {
   grid-column: span 2;
   grid-row: span 1;
@@ -71,7 +68,6 @@
   grid-row: span 1;
 }
 
-/* Fade-in on scroll */
 .gallery-item {
   opacity: 0;
   transform: translateY(40px);
