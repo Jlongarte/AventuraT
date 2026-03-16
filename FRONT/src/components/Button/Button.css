@@ -21,7 +21,7 @@
   min-width: 220px;
   max-width: 220px;
 
-  flex: none; /* 👈 esto evita que flex cambie el tamaño */
+  flex: none;
 
   transition:
     background-color 0.4s ease,
@@ -41,13 +41,11 @@
   padding: 14px 43px;
 }
 
-/* Texto */
 .btn .text {
   position: relative;
   z-index: 2;
 }
 
-/* Círculo con flecha diagonal */
 .btn .icon {
   position: absolute;
   top: 50%;
@@ -67,20 +65,17 @@
     color 0.4s ease;
 }
 
-/* En hover: el círculo se desliza hacia la izquierda */
 .btn.primary:hover .icon {
   transform: translate(-160px, -50%);
   background-color: #fff;
   color: var(--main-color);
 }
 
-/* Foco accesible */
 .btn:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
-/* SVG: asegura proporción y trazo consistente */
 .btn .icon svg {
   width: 18px;
   height: 18px;
@@ -88,21 +83,20 @@
 }
 
 .btn.secondary {
-  background-color: transparent; /* Fondo transparente */
-  color: #fff; /* Mismo color de texto que primary */
-  border: 2px solid #fff; /* Opcional: resalta el contorno */
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
 }
 
 .btn.secondary:hover {
-  background-color: var(--main-color); /* Fondo del hover */
+  background-color: var(--main-color);
   color: #fff;
   border-color: var(--main-color);
 }
 
-/* Círculo con flecha diagonal para secondary */
 .btn.secondary .icon {
-  background-color: #fff; /* Burbuja blanca */
-  color: var(--main-color); /* Ícono del mismo color del texto */
+  background-color: #fff;
+  color: var(--main-color);
   transition:
     transform 1s ease-in-out,
     background-color 0.4s ease,
