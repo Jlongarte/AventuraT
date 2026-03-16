@@ -24,14 +24,13 @@ nav ul:first-of-type {
 }
 
 nav > ul > li > a {
-  position: relative; /* NECESARIO para ::after */
+  position: relative;
   color: var(--secondary-color);
   cursor: pointer;
   text-decoration: none;
   padding: 5px 0;
 }
 
-/* Línea animada */
 nav > ul > li > a::after {
   content: "";
   position: absolute;
