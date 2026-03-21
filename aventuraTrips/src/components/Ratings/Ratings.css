@@ -1,0 +1,83 @@
+.ratings {
+  text-align: center;
+  padding: 60px 20px 20px;
+}
+
+.ratings h2 {
+  font-size: 1.8rem;
+  color: #2d1c00;
+}
+
+section.stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #f3fbfe;
+  border-radius: 10px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  max-width: 1000px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+}
+
+section.stats.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stat {
+  text-align: center;
+  flex: 1;
+  border-right: 1px solid #eee;
+}
+
+.stat:last-child {
+  border-right: none;
+}
+
+.stat h3 {
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+.stat p {
+  margin-top: 8px;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* ===============================
+             VERSIÓN TABLET 
+=============================== */
+
+@media (min-width: 768px) and (max-width: 1180px) {
+  .reviews > h2 {
+    padding: 0;
+    margin-bottom: 40px;
+  }
+}
+
+/* ===============================
+   MOBILE — hasta 767px
+=============================== */
+@media (max-width: 767px) {
+  section.stats {
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+  }
+
+  .stat {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+  }
+
+  .stat:last-child {
+    border-bottom: none;
+  }
+}
