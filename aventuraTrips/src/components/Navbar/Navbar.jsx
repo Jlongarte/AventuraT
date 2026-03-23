@@ -10,7 +10,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="nav">
+    <nav className={`nav ${isOpen ? "active" : ""}`}>
       <NavLink to="/" className="logo-link">
         <img
           src="https://res.cloudinary.com/dzo0dufcr/image/upload/v1772454036/logoAventura_qge2md.webp"
@@ -63,10 +63,24 @@ const Navbar = () => {
             <i className="fa-regular fa-heart"></i>
           </NavLink>
         </li>
+
+        {/* botones dentor del menú en móvil */}
+        <li className="btn-user mobile-only">
+          <i className="fa-regular fa-user"></i>
+          <NavLink to="/login" onClick={() => setIsOpen(false)}>
+            Login
+          </NavLink>
+        </li>
+        <li className="btn-user mobile-only">
+          <i className="fa-solid fa-user"></i>
+          <NavLink to="/register" onClick={() => setIsOpen(false)}>
+            Register
+          </NavLink>
+        </li>
       </ul>
 
-      {/* Botones usuario */}
-      <ul className="user-links">
+      {/* Botones usuario solo desktop */}
+      <ul className="user-links desktop-only">
         <li className="btn-user">
           <i className="fa-regular fa-user"></i>
           <NavLink to="/login">Login</NavLink>

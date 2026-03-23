@@ -1,6 +1,7 @@
 /* HERO + PARALAX SECTION */
 .hero {
   position: relative;
+  z-index: 0;
   height: 80vh;
   margin: 0rem 3rem !important;
   overflow: hidden;
@@ -30,7 +31,7 @@
 
 .hero-content {
   position: relative;
-  z-index: 3;
+  z-index: 2;
   text-align: center;
   color: white;
 }
@@ -52,7 +53,7 @@
 .bubbles {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 1;
 }
 
 .bubble {
@@ -88,10 +89,8 @@
   top: 40%;
   right: 5%;
 }
-/* ===============================
-             VERSIÓN TABLET 
-=============================== */
 
+/* ================= TABLET ================= */
 @media (min-width: 768px) and (max-width: 1180px) {
   .hero {
     height: 50vh;
@@ -115,9 +114,8 @@
     display: none;
   }
 }
-/* ===============================
-   MOBILE — hasta 767px
-=============================== */
+
+/* ================= MOBILE ================= */
 @media (max-width: 767px) {
   .hero {
     height: 80vh;

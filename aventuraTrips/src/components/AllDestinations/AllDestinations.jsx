@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Button from "../Button/Button.jsx";
 import "./AllDestinations.css";
 
+//https://api-project-jani-and-mat.com/api/general/getTrips/1
+
 const AllDestinations = ({
   title,
   subtitle,

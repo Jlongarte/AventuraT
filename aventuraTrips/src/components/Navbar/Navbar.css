@@ -1,37 +1,32 @@
 nav {
   display: flex;
   justify-content: space-between;
-  align-content: center;
+  align-items: center;
   padding: 15px 30px;
   width: 100%;
   box-sizing: border-box;
   background-color: var(--main-color);
   position: relative;
+  z-index: 1000;
   gap: 20px;
   color: var(--secondary-color);
 }
 
-nav ul {
+/* NAV LINKS */
+.nav-links {
   display: flex;
-  gap: 20px;
-  justify-content: center;
+  gap: 35px;
   align-items: center;
 }
 
-nav ul:first-of-type {
-  display: flex;
-  gap: 35px;
-}
-
-nav > ul > li > a {
+.nav-links li a {
   position: relative;
   color: var(--secondary-color);
-  cursor: pointer;
   text-decoration: none;
   padding: 5px 0;
 }
 
-nav > ul > li > a::after {
+.nav-links li a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -44,42 +39,51 @@ nav > ul > li > a::after {
   transition: transform 0.3s ease;
 }
 
-/* Hover */
-nav > ul > li > a:hover::after {
+.nav-links li a:hover::after {
   transform: scaleX(1);
 }
 
+/* LOGO */
 .logo-link {
   display: flex;
   align-items: center;
 }
 
 .logo {
-  display: block;
   width: 100%;
+}
+
+/* USER */
+.user-links {
+  display: flex;
+  gap: 15px;
 }
 
 .btn-user {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 10px;
   border: solid 1px var(--secondary-color);
   border-radius: 22px;
-  padding: 4px 24px;
+  padding: 4px 16px;
+  cursor: pointer;
 }
 
+.btn-user > a {
+  text-decoration: none;
+  color: var(--secondary-color);
+}
 .btn-user:hover {
   background-color: var(--hover);
 }
+
+/* HAMBURGER */
 .hamburger {
   display: none;
   flex-direction: column;
   cursor: pointer;
   gap: 5px;
-  align-self: center;
-  z-index: 1000;
-  position: relative;
+  z-index: 1100;
 }
 
 .hamburger span {
@@ -87,68 +91,69 @@ nav > ul > li > a:hover::after {
   height: 3px;
   background-color: var(--secondary-color);
   border-radius: 2px;
+  transition: 0.3s;
 }
 
-/* ===============================
-             VERSIÓN TABLET 
-=============================== */
-
-@media (min-width: 768px) and (max-width: 1180px) {
-  nav {
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  .logo {
-    width: 25%;
-  }
-
-  nav ul {
-    gap: 15px;
-    flex-wrap: wrap;
-  }
-
-  /*SECOND-HERO SECTION */
-  section.second-hero {
-    height: 50vh !important;
-  }
+/* Animación */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
 }
 
-/* ===============================
-   MOBILE — hasta 767px
-=============================== */
-@media (max-width: 767px) {
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
-    gap: 10px;
-  }
+/* ================= RESPONSIVE ================= */
 
-  .logo {
-    width: 40%;
-  }
-
+@media (max-width: 1180px) {
   .hamburger {
     display: flex;
   }
 
-  nav ul {
-    display: none;
-    flex-direction: column;
+  .nav-links {
+    position: fixed;
+    top: 90px;
+    left: 0;
     width: 100%;
-    text-align: left;
+    flex-direction: column;
     background-color: var(--main-color);
-    padding: 10px 0;
+    display: none;
+    padding: 20px 0;
+    gap: 15px;
+    z-index: 2000;
   }
 
-  nav.active ul {
+  .nav-links.active {
     display: flex;
   }
 
-  nav ul li {
-    width: 100%;
+  .nav-links li {
     text-align: center;
-    padding: 8px 0;
+    width: 100%;
+  }
+
+  .user-links {
+    display: none;
+  }
+
+  .mobile-only {
+    display: flex;
+    justify-content: center;
+  }
+  li.btn-user .mobile-only {
+    width: 80%;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1181px) {
+  .mobile-only {
+    display: none;
+  }
+  li.btn-user .mobile-only {
+    width: 80%;
+    justify-content: center;
   }
 }
