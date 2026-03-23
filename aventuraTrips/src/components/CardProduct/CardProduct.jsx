@@ -1,6 +1,6 @@
 import "./CardProduct.css";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const CardProduct = () => {
   const { id } = useParams();
@@ -12,7 +12,6 @@ const CardProduct = () => {
     const fetchTripById = async () => {
       try {
         setLoading(true);
-
         const url = `https://api-project-jani-and-mat.com/api/general/getTrip/${id}`;
 
         const res = await fetch(url);
@@ -39,7 +38,6 @@ const CardProduct = () => {
             discountPercentage: trip.discountPercentage,
           });
 
-          // Seteamos la imagen inicial
           setMainImage(
             trip.imageUrls && trip.imageUrls.length > 0
               ? trip.imageUrls[0]
@@ -123,7 +121,10 @@ const CardProduct = () => {
 
         <div className="actions">
           <button className="second-btn">Add to Cart</button>
-          <button className="second-btn">Buy It Now</button>
+
+          <Link to={`/checkout/${id}`} className="second-btn buy-now-link">
+            Buy It Now
+          </Link>
         </div>
       </div>
     </div>

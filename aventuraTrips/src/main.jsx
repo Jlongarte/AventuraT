@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import Home from "./pages/Home.jsx";
 import Destinations from "./pages/Destinations.jsx";
 import Offers from "./pages/Offers.jsx";
@@ -13,6 +12,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import ProductPage from "./pages/CardProducts.jsx";
+import Payment from "./pages/Payment.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -27,6 +27,10 @@ createRoot(document.getElementById("root")).render(
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="product/:id" element={<ProductPage />} />
+          <Route
+            path="checkout/:id"
+            element={<Payment title="Complete Your" />}
+          />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

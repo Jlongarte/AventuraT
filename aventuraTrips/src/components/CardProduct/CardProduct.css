@@ -107,7 +107,11 @@
 }
 
 /* BOTONES */
+
 .second-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   padding: 14px;
   font-size: 15px;
@@ -115,16 +119,24 @@
   border-radius: 6px;
   border: none;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
   margin-bottom: 15px;
   background: var(--main-color);
   color: var(--secondary-color);
+  text-decoration: none;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 .second-btn:hover {
   background: var(--hover);
+  color: var(--secondary-color);
+  opacity: 0.9;
 }
 
+.second-btn:visited {
+  color: var(--secondary-color);
+}
 .overlay {
   pointer-events: none;
 }
