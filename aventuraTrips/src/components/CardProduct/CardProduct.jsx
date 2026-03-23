@@ -6,103 +6,125 @@ const CardProduct = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTripById = async () => {
       try {
-        const res = await fetch(
-          "https://api-project-jani-and-mat.com/api/general/getRandomTrips/10",
-        );
+        setLoading(true);
 
-        if (!res.ok) throw new Error("Error en la API");
+        const url = `https://api-project-jani-and-mat.com/api/general/getTrip/${id}`;
 
-        const data = await res.json();
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Error ${res.status}: No encontrado`);
 
-        const trip = data.data.find((t) => t.id === id);
+        const json = await res.json();
+        const trip = json.data;
 
-        if (!trip) {
-          console.warn("No se encontró el trip con id:", id);
-          return;
+        if (trip) {
+          setProduct({
+            title: trip.title,
+            location: trip.place,
+            price: trip.price,
+            description: trip.description,
+            images:
+              trip.imageUrls && trip.imageUrls.length > 0
+                ? trip.imageUrls
+                : [trip.imageUrl],
+            services: "Hotel + Flight",
+            duration: "5 days",
+            watchers: trip.watching || 0,
+            sold: trip.sold || 0,
+            isDiscount: trip.isDiscount,
+            discountPercentage: trip.discountPercentage,
+          });
+
+          // Seteamos la imagen inicial
+          setMainImage(
+            trip.imageUrls && trip.imageUrls.length > 0
+              ? trip.imageUrls[0]
+              : trip.imageUrl,
+          );
         }
-
-        const adaptedProduct = {
-          title: trip.title,
-          location: trip.place,
-          price: trip.price,
-          description: trip.title,
-          images: [trip.imageUrl, trip.imageUrl, trip.imageUrl, trip.imageUrl],
-          services: "Hotel + Flight",
-          duration: "5 days",
-          watchers: 12,
-          sold: 30,
-          isDiscount: trip.isDiscount,
-          discountPercentage: trip.discountPercentage,
-        };
-
-        setProduct(adaptedProduct);
-        setMainImage(trip.imageUrl);
       } catch (error) {
-        console.error(error);
+        console.error("Error en el fetch:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchTripById();
+    if (id) fetchTripById();
   }, [id]);
 
-  if (!product) return <p>Cargando...</p>;
+  if (loading) {
+    return <div className="loading">Loading trip details...</div>;
+  }
+
+  if (!product) {
+    return <div className="error">Trip not found.</div>;
+  }
 
   return (
     <div className="product-container">
-      {/* IZQUIERDA: imágenes */}
       <div className="gallery-product">
-        <img className="main-image" src={mainImage} alt={product.title} />
+        <div className="main-image-wrapper">
+          <img className="main-image" src={mainImage} alt={product.title} />
+        </div>
         <div className="thumbnails">
           {product.images.map((img, index) => (
             <img
               key={index}
               src={img}
-              alt={`thumb-${index}`}
+              alt={`Vista ${index + 1}`}
+              className={mainImage === img ? "active-thumb" : ""}
               onClick={() => setMainImage(img)}
             />
           ))}
         </div>
       </div>
 
-      {/* DERECHA */}
       <div className="details">
         <h1>
           Discover <span className="aventura">{product.location}</span> at your
           own pace
         </h1>
 
-        <div className="price">
+        <div className="price-section">
           {product.isDiscount ? (
-            <>
+            <div className="price-container">
               <span className="original-price">{product.price}</span>
-              <span className="discount">-{product.discountPercentage}%</span>
-            </>
+              <span className="discount-tag">
+                -{product.discountPercentage}% OFF
+              </span>
+            </div>
           ) : (
-            product.price
+            <span className="price-tag">{product.price}</span>
           )}
         </div>
 
-        <ul className="info">
-          <li>
-            <strong>Services:</strong> {product.services}
-          </li>
-          <li>
-            <strong>Duration:</strong> {product.duration}
-          </li>
-        </ul>
-
-        <div className="stats">
-          <p>👁 {product.watchers} are watching</p>
-          <p>🔥 {product.sold} sold recently</p>
+        <div className="stats-pills">
+          <span>👁️ {product.watchers} people are watching</span>
+          <span>🔥 {product.sold} sold recently</span>
         </div>
 
-        <p className="description">{product.description}</p>
-        <button className="second-btn primary">Add to Cart</button>
-        <button className="second-btn secondary">Buy It Now</button>
+        <div className="info-box">
+          <p>
+            <strong>Services:</strong> {product.services}
+          </p>
+          <p>
+            <strong>Duration:</strong> {product.duration}
+          </p>
+        </div>
+
+        <div className="description-section">
+          <h3>About this trip</h3>
+          <p className="description">{product.description}</p>
+        </div>
+
+        <div className="actions">
+          <button className="second-btn">Add to Cart</button>
+          <button className="second-btn">Buy It Now</button>
+        </div>
       </div>
     </div>
   );

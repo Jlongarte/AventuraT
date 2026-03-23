@@ -50,19 +50,27 @@
 /* =======================
       DERECHA - DETALLES
 ======================= */
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .details h1 {
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 15px;
 }
 
-.price {
+.price-tag {
   font-size: 38px;
   font-weight: 700;
   color: var(--main-color);
   margin-bottom: 25px;
 }
 
+.info-box {
+  margin-bottom: 20px;
+}
 .info {
   list-style: none;
   margin-bottom: 20px;
@@ -73,6 +81,10 @@
   margin-bottom: 10px;
 }
 
+.stats-pills {
+  display: flex;
+  flex-direction: column;
+}
 .stats {
   font-size: 14px;
   color: #555;
@@ -83,6 +95,11 @@
   margin-bottom: 6px;
 }
 
+.description-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 .description {
   font-size: 15px;
   line-height: 1.6;
@@ -100,19 +117,17 @@
   cursor: pointer;
   transition: background 0.3s;
   margin-bottom: 15px;
-}
-
-.primary,
-.secondary {
   background: var(--main-color);
   color: var(--secondary-color);
 }
 
-.primary:hover,
-.secondary:hover {
+.second-btn:hover {
   background: var(--hover);
 }
 
+.overlay {
+  pointer-events: none;
+}
 /* =======================
         RESPONSIVE
 ======================= */
@@ -191,11 +206,4 @@
   .description {
     font-size: 14px;
   }
-}
-
-/* =======================
-        EXTRA
-======================= */
-.overlay {
-  pointer-events: none;
 }

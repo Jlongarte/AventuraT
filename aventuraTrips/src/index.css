@@ -39,6 +39,28 @@ ul {
   list-style: none;
 }
 
+/* Estilo base del botón página All Destinations */
+.btn-page {
+  background-color: var(--main-color);
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-page:hover:not(:disabled) {
+  background-color: var(--hover);
+}
+
+/* Estilo cuando el botón está deshabilitado */
+.btn-page:disabled {
+  background-color: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
 /* ===============================
              VERSIÓN TABLET 
 =============================== */
