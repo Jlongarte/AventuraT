@@ -2,16 +2,23 @@ import "./Form.css";
 
 const Form = () => {
   return (
-    <section className="form">
+    <section className="form" id="form">
       <h2>
-        Let's Start Planning <br />
-        Your Next <span className="red-color">Great Journey</span>
+        Do you Have any Questions? <br></br>
+        <span className="red-color">Get in Touch!</span>
       </h2>
+      <p className="email-p">
+        Email us and we will get back to you as soon as possible.
+      </p>
 
       <form className="form-card">
         <div className="form-group">
-          <label>Full Name</label>
-          <input type="text" placeholder="Type Your Full Name" />
+          <label>First Name</label>
+          <input type="text" placeholder="Type Your First Name" />
+        </div>
+        <div className="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Type Your Last Name" />
         </div>
 
         <div className="form-group">
@@ -20,23 +27,8 @@ const Form = () => {
         </div>
 
         <div className="form-group">
-          <label>Arrived</label>
-          <input type="date" />
-        </div>
-
-        <div className="form-group">
-          <label>Date & Time</label>
-          <input type="datetime-local" />
-        </div>
-
-        <div className="form-group">
           <label>Phone Number</label>
           <input type="tel" placeholder="Enter your number" />
-        </div>
-
-        <div className="form-group">
-          <label>Guests</label>
-          <input type="text" placeholder="2 Child, 2 Adult" />
         </div>
 
         <div className="form-group full">

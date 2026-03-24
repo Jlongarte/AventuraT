@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Hero from "../components/Hero/Hero";
 import TravelPartners from "../components/Travel_Partners/Travel_Partners";
 import AllDestinations from "../components/AllDestinations/AllDestinations";
@@ -9,6 +11,20 @@ import Form from "../components/Form/Form";
 import Phrase from "../components/Phrase/Phrase";
 
 const Home = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash === "#form") {
+      const el = document.getElementById("form");
+
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [location]);
+
   return (
     <>
       <Hero />

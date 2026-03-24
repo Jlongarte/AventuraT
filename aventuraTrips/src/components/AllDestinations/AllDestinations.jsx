@@ -2,9 +2,16 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button.jsx";
 import "./AllDestinations.css";
+import { useNavigate } from "react-router-dom";
 
-const AllDestinations = ({ page = 1, perPage = 9, setTotalTrips }) => {
+const AllDestinations = ({
+  page = 1,
+  perPage = 9,
+  setTotalTrips,
+  showButton = true,
+}) => {
   const [trips, setTrips] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTrips = async () => {
@@ -18,7 +25,6 @@ const AllDestinations = ({ page = 1, perPage = 9, setTotalTrips }) => {
         const tripsData = data.data || [];
 
         setTrips(tripsData);
-
         setTotalTrips && setTotalTrips(tripsData.length);
       } catch (error) {
         console.error(error);
@@ -35,7 +41,28 @@ const AllDestinations = ({ page = 1, perPage = 9, setTotalTrips }) => {
       <div className="container">
         <div className="discover">
           <h2>Discover the World's Most Loved Destinations</h2>
-          <Button text="Book Your Trip" className="primary" />
+
+          {showButton && (
+            <Button
+              text="Book Your Trip"
+              icon={
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M3 3l10 10M13 3h-10v10" />
+                </svg>
+              }
+              className="primary"
+              onClick={() => navigate("/destinations")}
+            />
+          )}
         </div>
 
         <div className="trips-grid">

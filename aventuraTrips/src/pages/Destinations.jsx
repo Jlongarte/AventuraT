@@ -27,7 +27,7 @@ const Destinations = () => {
 
   return (
     <>
-      <AllDestinations trips={currentTrips} />
+      <AllDestinations trips={currentTrips} showButton={false} />
 
       <div style={{ textAlign: "center", margin: "2rem" }}>
         <button

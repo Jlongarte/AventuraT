@@ -1,10 +1,11 @@
 import "./Gallery.css";
 import Button from "../Button/Button";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Gallery = () => {
   const [images, setImages] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -57,14 +58,14 @@ const Gallery = () => {
           </h2>
 
           <Button
-            text="Book Your Trip"
+            text="Explore More"
             icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
                 fill="none"
-                stroke="black"
+                stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -73,7 +74,7 @@ const Gallery = () => {
               </svg>
             }
             className="primary"
-            onClick={() => console.log("secondary button clicked")}
+            onClick={() => navigate("/destinations")}
           />
         </div>
 

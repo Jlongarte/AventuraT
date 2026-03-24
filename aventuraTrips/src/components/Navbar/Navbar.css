@@ -217,7 +217,7 @@ nav {
     display: flex;
     justify-content: center;
   }
-  li.btn-user .mobile-only {
+  li.btn-user.mobile-only {
     width: 80%;
     justify-content: center;
   }
@@ -227,8 +227,9 @@ nav {
   .mobile-only {
     display: none;
   }
-  li.btn-user .mobile-only {
+  li.btn-user.mobile-only {
     width: 80%;
     justify-content: center;
   }
+
 }

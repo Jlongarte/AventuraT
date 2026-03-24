@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
 import "./Hero.css";
 import Button from "../Button/Button";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
   const heroRef = useRef(null);
   const bubblesRef = useRef([]);
 
@@ -99,7 +101,7 @@ const Hero = () => {
 
           <div className="hero-buttons">
             <Button
-              text="Plan Your Trip"
+              text="Book Your Trip"
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -115,11 +117,11 @@ const Hero = () => {
                 </svg>
               }
               className="primary"
-              onClick={() => console.log("Primary button clicked")}
+              onClick={() => navigate("/destinations")}
             />
 
             <Button
-              text="Book Your Trip"
+              text="Contact Us"
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +137,7 @@ const Hero = () => {
                 </svg>
               }
               className="secondary"
-              onClick={() => console.log("secondary button clicked")}
+              onClick={() => navigate("/#form")}
             />
           </div>
         </div>

@@ -56,6 +56,9 @@ textarea:focus {
   color: white;
 }
 
+.email-p {
+  margin-bottom: 20px;
+}
 /* ===============================
              VERSIÓN TABLET 
 =============================== */
