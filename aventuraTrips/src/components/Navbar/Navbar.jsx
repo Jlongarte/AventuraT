@@ -84,6 +84,27 @@ const Navbar = () => {
             <i className="fa-regular fa-heart"></i>
           </NavLink>
         </li>
+
+        {/* Botones usuario solo visibles en móvil */}
+        {!user ? (
+          <>
+            <li className="btn-user mobile-only">
+              <i className="fa-regular fa-user"></i>
+              <NavLink to="/login" onClick={() => setIsOpen(false)}>Login</NavLink>
+            </li>
+            <li className="btn-user mobile-only">
+              <i className="fa-solid fa-user"></i>
+              <NavLink to="/register" onClick={() => setIsOpen(false)}>Register</NavLink>
+            </li>
+          </>
+        ) : (
+          <li className="mobile-only">
+            <button onClick={handleLogout} className="btn-user" style={{ background: "none", color: "var(--secondary-color)" }}>
+              <i className="fa-solid fa-right-from-bracket"></i>
+              Logout
+            </button>
+          </li>
+        )}
       </ul>
 
       {/* Botones usuario */}
