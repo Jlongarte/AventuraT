@@ -5,69 +5,56 @@ import "./AllDestinations.css";
 
 const AllDestinations = ({
   page = 1,
-  perPage = 9,
   setTotalTrips,
   showButton = true,
   apiUrl,
   showDiscount = false,
 }) => {
   const [trips, setTrips] = useState([]);
+  const [loading, setLoading] = useState(true); // Estado para la suavidad de la paginación
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTrips = async () => {
+      setLoading(true);
       try {
         const url =
           apiUrl ||
           `https://api-project-jani-and-mat.com/api/general/getTrips/${page}`;
         const res = await fetch(url);
-        if (!res.ok) throw new Error("Error en la API");
-
         const data = await res.json();
         const tripsData = data.data || [];
 
         setTrips(tripsData);
-        setTotalTrips && setTotalTrips(tripsData.length);
+        if (setTotalTrips) setTotalTrips(tripsData.length);
+
+        // Delay para la paginación suave
+        setTimeout(() => setLoading(false), 100);
       } catch (error) {
         console.error(error);
-        setTrips([]);
-        setTotalTrips && setTotalTrips(0);
+        setLoading(false);
       }
     };
 
     fetchTrips();
-  }, [page, setTotalTrips, apiUrl]);
+  }, [page, apiUrl, setTotalTrips]);
 
   return (
     <section className="destinations">
       <div className="container">
         <div className="discover">
           <h2>Discover the World's Most Loved Destinations</h2>
-
           {showButton && (
             <Button
               text="Book Your Trip"
-              icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M3 3l10 10M13 3h-10v10" />
-                </svg>
-              }
               className="primary"
               onClick={() => navigate("/destinations")}
             />
           )}
         </div>
 
-        <div className="trips-grid">
+        {/* Animación para la paginación */}
+        <div className={`trips-grid ${loading ? "loading-out" : "fade-in"}`}>
           {trips.map((trip) => (
             <Link
               key={trip.id}

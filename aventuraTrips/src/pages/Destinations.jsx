@@ -1,51 +1,45 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import AllDestinations from "../components/AllDestinations/AllDestinations";
 
 const Destinations = () => {
   const [page, setPage] = useState(1);
-  const [allTrips, setAllTrips] = useState([]);
-  const perPage = 3;
+  const [totalInPage, setTotalInPage] = useState(0);
+  const perPage = 9;
 
-  const totalPages = Math.ceil(allTrips.length / perPage);
-
-  useEffect(() => {
-    const fetchTrips = async () => {
-      try {
-        const res = await fetch(
-          "https://api-project-jani-and-mat.com/api/general/getTrips/1",
-        );
-        const data = await res.json();
-        setAllTrips(data.data || []);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchTrips();
-  }, []);
-
-  const currentTrips = allTrips.slice((page - 1) * perPage, page * perPage);
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+    // Scroll suave hacia arriba
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <>
-      <AllDestinations trips={currentTrips} showButton={false} />
+      <AllDestinations
+        page={page}
+        setTotalTrips={setTotalInPage}
+        showButton={false}
+      />
 
       <div style={{ textAlign: "center", margin: "2rem" }}>
         <button
           className="btn-page"
-          onClick={() => setPage((p) => Math.max(p - 1, 1))}
+          onClick={() => handlePageChange(Math.max(page - 1, 1))}
           disabled={page === 1}
         >
           ⬅ Prev
         </button>
 
-        <span style={{ margin: "0 1rem" }}>
-          Page {page} of {totalPages || 1}
+        <span style={{ margin: "0 1rem", fontWeight: "bold" }}>
+          Page {page}
         </span>
 
         <button
           className="btn-page"
-          onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-          disabled={page >= totalPages}
+          onClick={() => handlePageChange(page + 1)}
+          disabled={totalInPage < perPage}
         >
           Next ➡
         </button>
