@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../Button/Button.jsx";
 import "./AllDestinations.css";
-import { useNavigate } from "react-router-dom";
 
 const AllDestinations = ({
   page = 1,
   perPage = 9,
   setTotalTrips,
   showButton = true,
+  apiUrl,
+  showDiscount = false,
 }) => {
   const [trips, setTrips] = useState([]);
   const navigate = useNavigate();
@@ -16,9 +17,10 @@ const AllDestinations = ({
   useEffect(() => {
     const fetchTrips = async () => {
       try {
-        const res = await fetch(
-          `https://api-project-jani-and-mat.com/api/general/getTrips/${page}`,
-        );
+        const url =
+          apiUrl ||
+          `https://api-project-jani-and-mat.com/api/general/getTrips/${page}`;
+        const res = await fetch(url);
         if (!res.ok) throw new Error("Error en la API");
 
         const data = await res.json();
@@ -34,7 +36,7 @@ const AllDestinations = ({
     };
 
     fetchTrips();
-  }, [page, setTotalTrips]);
+  }, [page, setTotalTrips, apiUrl]);
 
   return (
     <section className="destinations">
@@ -80,6 +82,11 @@ const AllDestinations = ({
                 <h3>{trip.place}</h3>
                 <p>{trip.title}</p>
                 <div className="meta">
+                  {showDiscount && trip.isDiscount && (
+                    <span className="discount">
+                      🔥 {trip.discountPercentage}% OFF
+                    </span>
+                  )}
                   <span className="price">{trip.price}</span>
                   <span className="rating">⭐ {trip.rating}</span>
                 </div>

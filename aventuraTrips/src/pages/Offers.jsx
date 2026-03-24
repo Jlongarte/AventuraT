@@ -2,12 +2,11 @@ import AllDestinations from "../components/AllDestinations/AllDestinations";
 
 const Offers = () => {
   return (
-    <>
-      <AllDestinations
-        title="Follow Our Latest Offers 🔥"
-        onlyDiscount={true}
-      />
-    </>
+    <AllDestinations
+      apiUrl="https://api-project-jani-and-mat.com/api/general/getDiscountTrips"
+      showDiscount={true}
+      showButton={false}
+    />
   );
 };
 
