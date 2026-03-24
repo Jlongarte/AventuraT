@@ -1,13 +1,34 @@
 import "./Navbar.css";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const menuRef = useRef(null);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleLogout = () => {
+    logout();
+    setMenuOpen(false);
+    navigate("/");
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <nav className={`nav ${isOpen ? "active" : ""}`}>
@@ -63,32 +84,50 @@ const Navbar = () => {
             <i className="fa-regular fa-heart"></i>
           </NavLink>
         </li>
-
-        {/* botones dentor del menú en móvil */}
-        <li className="btn-user mobile-only">
-          <i className="fa-regular fa-user"></i>
-          <NavLink to="/login" onClick={() => setIsOpen(false)}>
-            Login
-          </NavLink>
-        </li>
-        <li className="btn-user mobile-only">
-          <i className="fa-solid fa-user"></i>
-          <NavLink to="/register" onClick={() => setIsOpen(false)}>
-            Register
-          </NavLink>
-        </li>
       </ul>
 
-      {/* Botones usuario solo desktop */}
-      <ul className="user-links desktop-only">
-        <li className="btn-user">
-          <i className="fa-regular fa-user"></i>
-          <NavLink to="/login">Login</NavLink>
-        </li>
-        <li className="btn-user">
-          <i className="fa-solid fa-user"></i>
-          <NavLink to="/register">Register</NavLink>
-        </li>
+      {/* Botones usuario */}
+      <ul className="user-links">
+        {!user ? (
+          <>
+            <li className="btn-user">
+              <i className="fa-regular fa-user"></i>
+              <NavLink to="/login">Login</NavLink>
+            </li>
+            <li className="btn-user">
+              <i className="fa-solid fa-user"></i>
+              <NavLink to="/register">Register</NavLink>
+            </li>
+          </>
+        ) : (
+          <li className="user-menu-wrapper" ref={menuRef}>
+            <button
+              className="user-menu-toggle"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <img
+                src={user.imageUrl}
+                alt="avatar"
+                className="user-avatar"
+              />
+              <i className={`fa-solid fa-chevron-${menuOpen ? "up" : "down"}`}></i>
+            </button>
+
+            {menuOpen && (
+              <ul className="user-dropdown">
+                <li className="dropdown-header">
+                  <span>{user.name}</span>
+                </li>
+                <li>
+                  <button onClick={handleLogout}>
+                    <i className="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            )}
+          </li>
+        )}
       </ul>
     </nav>
   );

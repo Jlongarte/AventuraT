@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 import Home from "./pages/Home.jsx";
 import Destinations from "./pages/Destinations.jsx";
 import Offers from "./pages/Offers.jsx";
@@ -16,8 +17,9 @@ import Payment from "./pages/Payment.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
           <Route path="destinations" element={<Destinations />} />
@@ -34,6 +36,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+      </BrowserRouter>
+    </AuthProvider>
   </StrictMode>,
 );

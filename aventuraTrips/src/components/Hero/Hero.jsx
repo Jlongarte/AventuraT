@@ -74,10 +74,7 @@ const Hero = () => {
       <div className="container">
         <div className="hero-bg">
           <video autoPlay muted loop playsInline className="hero-video">
-            <source
-              src="../../../public/assets/AdobeStock_118726863.mov"
-              type="video/mp4"
-            />
+            <source src="/assets/AdobeStock_118726863.mov" type="video/mp4" />
             Tu navegador no soporta video.
           </video>
         </div>
