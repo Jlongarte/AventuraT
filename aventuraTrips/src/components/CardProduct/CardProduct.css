@@ -140,6 +140,60 @@
 .overlay {
   pointer-events: none;
 }
+
+/*  ESTILO BURBUJA FAVORITOS  */
+
+#fav-toast-bubble.toast-bubble-container {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  backdrop-filter: blur(8px);
+  color: white !important;
+  padding: 20px 40px !important;
+  border-radius: 60px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 15px !important;
+  z-index: 999999 !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  white-space: nowrap;
+  pointer-events: none;
+  animation: bubblePopEffect 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    forwards;
+}
+
+.toast-icon {
+  font-size: 1.6rem;
+}
+
+.toast-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+@keyframes bubblePopEffect {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -40%) scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.second-btn.already-fav {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+  border: 1px solid #e5e7eb;
+}
+
 /* =======================
         RESPONSIVE
 ======================= */

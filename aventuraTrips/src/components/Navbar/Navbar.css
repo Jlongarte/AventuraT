@@ -169,7 +169,7 @@ nav {
   transition: 0.3s;
 }
 
-/* Animación */
+/* Animación Menu Hamburguesa */
 .hamburger.open span:nth-child(1) {
   transform: rotate(45deg) translateY(8px);
 }
@@ -178,6 +178,29 @@ nav {
 }
 .hamburger.open span:nth-child(3) {
   transform: rotate(-45deg) translateY(-8px);
+}
+
+.cart-link,
+.wishlist-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-fav-badge,
+.nav-cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #ff4d4d;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+  min-width: 15px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* ================= RESPONSIVE ================= */
@@ -231,5 +254,4 @@ nav {
     width: 80%;
     justify-content: center;
   }
-
 }

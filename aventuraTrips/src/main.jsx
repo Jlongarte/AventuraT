@@ -14,28 +14,30 @@ import Register from "./pages/Register.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import ProductPage from "./pages/CardProducts.jsx";
 import Payment from "./pages/Payment.jsx";
+import WishList from "./pages/WishList.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="destinations" element={<Destinations />} />
-          <Route path="offers" element={<Offers />} />
-          <Route path="team" element={<Team />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="product/:id" element={<ProductPage />} />
-          <Route
-            path="checkout/:id"
-            element={<Payment title="Complete Your" />}
-          />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="destinations" element={<Destinations />} />
+            <Route path="offers" element={<Offers />} />
+            <Route path="team" element={<Team />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="wishlist" element={<WishList />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="product/:id" element={<ProductPage />} />
+            <Route
+              path="checkout/:id"
+              element={<Payment title="Complete Your" />}
+            />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
       </BrowserRouter>
     </AuthProvider>
   </StrictMode>,

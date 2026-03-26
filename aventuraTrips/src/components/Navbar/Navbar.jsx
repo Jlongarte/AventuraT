@@ -6,7 +6,10 @@ import { useAuth } from "../../context/AuthContext";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { user, logout } = useAuth();
+
+  // 1. Extraemos 'cart' del contexto junto a los demás datos
+  const { user, logout, favorites, cart } = useAuth();
+
   const navigate = useNavigate();
   const menuRef = useRef(null);
 
@@ -74,14 +77,33 @@ const Navbar = () => {
             Meet the Team
           </NavLink>
         </li>
+
+        {/* ICONO DE CARRITO CON CONTADOR */}
         <li>
-          <NavLink to="/cart" onClick={() => setIsOpen(false)}>
+          <NavLink
+            to="/cart"
+            onClick={() => setIsOpen(false)}
+            className="cart-link"
+          >
             <i className="fa-solid fa-cart-shopping"></i>
+            {/* 2. Mostramos el numero si hay productos en el carrito */}
+            {cart && cart.length > 0 && (
+              <span className="nav-cart-badge">{cart.length}</span>
+            )}
           </NavLink>
         </li>
+
+        {/* ICONO DE FAVORITOS CON CONTADOR */}
         <li>
-          <NavLink to="/wishlist" onClick={() => setIsOpen(false)}>
+          <NavLink
+            to="/wishlist"
+            onClick={() => setIsOpen(false)}
+            className="wishlist-link"
+          >
             <i className="fa-regular fa-heart"></i>
+            {favorites && favorites.length > 0 && (
+              <span className="nav-fav-badge">{favorites.length}</span>
+            )}
           </NavLink>
         </li>
 
@@ -90,16 +112,24 @@ const Navbar = () => {
           <>
             <li className="btn-user mobile-only">
               <i className="fa-regular fa-user"></i>
-              <NavLink to="/login" onClick={() => setIsOpen(false)}>Login</NavLink>
+              <NavLink to="/login" onClick={() => setIsOpen(false)}>
+                Login
+              </NavLink>
             </li>
             <li className="btn-user mobile-only">
               <i className="fa-solid fa-user"></i>
-              <NavLink to="/register" onClick={() => setIsOpen(false)}>Register</NavLink>
+              <NavLink to="/register" onClick={() => setIsOpen(false)}>
+                Register
+              </NavLink>
             </li>
           </>
         ) : (
           <li className="mobile-only">
-            <button onClick={handleLogout} className="btn-user" style={{ background: "none", color: "var(--secondary-color)" }}>
+            <button
+              onClick={handleLogout}
+              className="btn-user"
+              style={{ background: "none", color: "var(--secondary-color)" }}
+            >
               <i className="fa-solid fa-right-from-bracket"></i>
               Logout
             </button>
@@ -107,7 +137,7 @@ const Navbar = () => {
         )}
       </ul>
 
-      {/* Botones usuario */}
+      {/* Botones usuario (Desktop) */}
       <ul className="user-links">
         {!user ? (
           <>
@@ -126,12 +156,10 @@ const Navbar = () => {
               className="user-menu-toggle"
               onClick={() => setMenuOpen(!menuOpen)}
             >
-              <img
-                src={user.imageUrl}
-                alt="avatar"
-                className="user-avatar"
-              />
-              <i className={`fa-solid fa-chevron-${menuOpen ? "up" : "down"}`}></i>
+              <img src={user.imageUrl} alt="avatar" className="user-avatar" />
+              <i
+                className={`fa-solid fa-chevron-${menuOpen ? "up" : "down"}`}
+              ></i>
             </button>
 
             {menuOpen && (
