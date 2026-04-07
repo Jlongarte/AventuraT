@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext"; // Importamos el context
 import Button from "../Button/Button.jsx";
 import "./AllDestinations.css";
 
@@ -11,7 +12,8 @@ const AllDestinations = ({
   showDiscount = false,
 }) => {
   const [trips, setTrips] = useState([]);
-  const [loading, setLoading] = useState(true); // Estado para la suavidad de la paginación
+  const [loading, setLoading] = useState(true);
+  const { favorites } = useAuth(); // Obtenemos el array de IDs favoritos
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,7 +30,6 @@ const AllDestinations = ({
         setTrips(tripsData);
         if (setTotalTrips) setTotalTrips(tripsData.length);
 
-        // Delay para la paginación suave
         setTimeout(() => setLoading(false), 100);
       } catch (error) {
         console.error(error);
@@ -38,6 +39,10 @@ const AllDestinations = ({
 
     fetchTrips();
   }, [page, apiUrl, setTotalTrips]);
+
+  // --- FILTRO DE FAVORITOS ---
+  // Solo mostramos los viajes cuyo ID no esté incluido en el array de favoritos
+  const filteredTrips = trips.filter((trip) => !favorites.includes(trip.id));
 
   return (
     <section className="destinations">
@@ -53,9 +58,9 @@ const AllDestinations = ({
           )}
         </div>
 
-        {/* Animación para la paginación */}
         <div className={`trips-grid ${loading ? "loading-out" : "fade-in"}`}>
-          {trips.map((trip) => (
+          {/* Mapeamos filteredTrips en lugar de trips */}
+          {filteredTrips.map((trip) => (
             <Link
               key={trip.id}
               to={`/product/${trip.id}`}
@@ -74,12 +79,19 @@ const AllDestinations = ({
                       🔥 {trip.discountPercentage}% OFF
                     </span>
                   )}
-                  <span className="price">{trip.price}</span>
+                  <span className="price">{trip.price}€</span>
                   <span className="rating">⭐ {trip.rating}</span>
                 </div>
               </div>
             </Link>
           ))}
+
+          {/* Opcional: Mensaje si todos los viajes de esta página están en favoritos */}
+          {!loading && filteredTrips.length === 0 && (
+            <p className="no-trips-msg">
+              All trips on this page are in your wishlist!
+            </p>
+          )}
         </div>
       </div>
     </section>

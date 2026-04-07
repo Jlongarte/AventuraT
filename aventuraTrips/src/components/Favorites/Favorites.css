@@ -109,6 +109,50 @@
   transform: scale(1.1) rotate(10deg);
 }
 
+/*  MENSAJES USUARIO */
+
+.login-required-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+}
+.login-required-message > h2,
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 40px;
+}
+
+.explore-btn {
+  text-decoration: none;
+  background-color: transparent;
+  border: 1px solid var(--main-color);
+  color: var(--main-color);
+  padding: 10px 20px;
+  border-radius: 22px;
+}
+
+.explore-btn:hover {
+  background-color: var(--main-color);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.empty-favorites {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  gap: 40px;
+}
+
+.empty-favorites > p {
+  text-align: center;
+  font-size: 1.5rem;
+}
 /*  móviles */
 @media (max-width: 1024px) {
   .trips-grid {

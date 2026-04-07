@@ -10,7 +10,12 @@ const Favorites = () => {
 
   useEffect(() => {
     const fetchFavoritesFromServer = async () => {
-      if (!user) return;
+      // Si no hay usuario, dejamos de cargar para mostrar el mensaje de login
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+
       try {
         setLoading(true);
         const res = await fetch(
@@ -49,7 +54,24 @@ const Favorites = () => {
     }
   };
 
-  if (loading) return <div className="loading">Loading your wishlist...</div>;
+  // --- LÓGICA DE MENSAJES CONDICIONALES ---
+
+  // 1. Si no hay usuario logueado
+  if (!user) {
+    return (
+      <div className="login-required-message">
+        <h2>Please log in to view your Favorites</h2>
+        <Link stroke to="/login" className="explore-btn">
+          Login
+        </Link>
+      </div>
+    );
+  }
+
+  // 2. Si el usuario está logueado pero los datos aún se están descargando
+  if (loading) {
+    return <div className="loading">Loading your wishlist...</div>;
+  }
 
   return (
     <div className="favorites-container">
@@ -78,7 +100,6 @@ const Favorites = () => {
                   alt={trip.title}
                 />
 
-                {/* Botón de borrar */}
                 <button
                   className="remove-btn-overlay"
                   onClick={(e) => handleRemove(e, trip.id)}
