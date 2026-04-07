@@ -82,21 +82,19 @@ const CardProduct = () => {
             location: trip.place,
             price: trip.price,
             description: trip.description,
-            images:
-              trip.imageUrls?.length > 0 ? trip.imageUrls : [trip.imageUrl],
-            services: trip.services || "Hotel + Flight + Insurance",
-            duration: trip.duration || "5 Days / 4 Nights",
+            images: trip.imageUrls || [],
+            rating: trip.rating || 0,
+            startDate: trip.startDate,
+            endDate: trip.endDate,
             watchers: trip.watching || 0,
             sold: trip.sold || 0,
             isDiscount: trip.isDiscount,
             discountPercentage: trip.discountPercentage,
           });
-          setMainImage(
-            trip.imageUrls?.length > 0 ? trip.imageUrls[0] : trip.imageUrl,
-          );
+          setMainImage(trip.imageUrls?.length > 0 ? trip.imageUrls[0] : "");
         }
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching trip:", error);
       } finally {
         setLoading(false);
       }
@@ -137,16 +135,23 @@ const CardProduct = () => {
           Discover <span className="aventura">{product.location}</span>
         </h1>
 
+        <div className="rating-section">
+          <span className="stars">
+            {"⭐".repeat(Math.floor(product.rating))}
+          </span>
+          <span className="rating-number">{product.rating} Stars</span>
+        </div>
+
         <div className="price-section">
           {product.isDiscount ? (
             <div className="price-container">
-              <span className="original-price">{product.price}€</span>
+              <span className="original-price">{product.price}</span>
               <span className="discount-tag">
                 -{product.discountPercentage}% OFF
               </span>
             </div>
           ) : (
-            <span className="price-tag">{product.price}€</span>
+            <span className="price-tag">{product.price}</span>
           )}
         </div>
 
@@ -157,10 +162,10 @@ const CardProduct = () => {
 
         <div className="info-box">
           <p>
-            <strong>Services:</strong> {product.services}
+            <strong>Start Date:</strong> {product.startDate}
           </p>
           <p>
-            <strong>Duration:</strong> {product.duration}
+            <strong>End Date:</strong> {product.endDate}
           </p>
         </div>
 
