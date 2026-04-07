@@ -10,7 +10,7 @@ const Favorites = () => {
 
   useEffect(() => {
     const fetchFavoritesFromServer = async () => {
-      // Si no hay usuario, dejamos de cargar para mostrar el mensaje de login
+      // Si no hay usuario, mostramosr el mensaje de login
       if (!user) {
         setLoading(false);
         return;
@@ -56,7 +56,6 @@ const Favorites = () => {
 
   // --- LÓGICA DE MENSAJES CONDICIONALES ---
 
-  // 1. Si no hay usuario logueado
   if (!user) {
     return (
       <div className="login-required-message">
@@ -68,7 +67,6 @@ const Favorites = () => {
     );
   }
 
-  // 2. Si el usuario está logueado pero los datos aún se están descargando
   if (loading) {
     return <div className="loading">Loading your wishlist...</div>;
   }

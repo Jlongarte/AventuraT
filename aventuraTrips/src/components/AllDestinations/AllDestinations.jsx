@@ -13,7 +13,9 @@ const AllDestinations = ({
 }) => {
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { favorites } = useAuth(); // Obtenemos el array de IDs favoritos
+
+  // Extraemos tanto favorites como cart del context
+  const { favorites, cart } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,9 +42,16 @@ const AllDestinations = ({
     fetchTrips();
   }, [page, apiUrl, setTotalTrips]);
 
-  // --- FILTRO DE FAVORITOS ---
-  // Solo mostramos los viajes cuyo ID no esté incluido en el array de favoritos
-  const filteredTrips = trips.filter((trip) => !favorites.includes(trip.id));
+  // --- FILTRO COMBINADO (FAVORITOS + CARRITO) ---
+  // Solo mostramos los viajes cuyo ID NO esté en favorites Y NO esté en cart
+  const filteredTrips = trips.filter((trip) => {
+    const tripIdStr = trip.id.toString();
+    const isInFavorites = favorites.includes(tripIdStr);
+    const isInCart = cart.includes(tripIdStr);
+
+    // Retornamos true solo si NO está en ninguno de los dos
+    return !isInFavorites && !isInCart;
+  });
 
   return (
     <section className="destinations">
@@ -59,7 +68,6 @@ const AllDestinations = ({
         </div>
 
         <div className={`trips-grid ${loading ? "loading-out" : "fade-in"}`}>
-          {/* Mapeamos filteredTrips en lugar de trips */}
           {filteredTrips.map((trip) => (
             <Link
               key={trip.id}
@@ -79,17 +87,17 @@ const AllDestinations = ({
                       🔥 {trip.discountPercentage}% OFF
                     </span>
                   )}
-                  <span className="price">{trip.price}€</span>
+                  <span className="price">{trip.price}</span>
                   <span className="rating">⭐ {trip.rating}</span>
                 </div>
               </div>
             </Link>
           ))}
 
-          {/* Opcional: Mensaje si todos los viajes de esta página están en favoritos */}
+          {/* Mensaje dinámico si no quedan viajes por mostrar */}
           {!loading && filteredTrips.length === 0 && (
             <p className="no-trips-msg">
-              All trips on this page are in your wishlist!
+              All available trips are already in your cart or wishlist! ✈️
             </p>
           )}
         </div>

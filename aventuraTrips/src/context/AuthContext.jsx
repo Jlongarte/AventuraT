@@ -28,7 +28,7 @@ export function AuthProvider({ children }) {
     setCart([]);
   };
 
-  // AÑADIR A  FAVORITOS
+  // --- LÓGICA DE FAVORITOS ---
   const addFavoriteLocally = (tripId) => {
     setFavorites((prev) => {
       if (prev.includes(tripId.toString())) return prev;
@@ -46,11 +46,20 @@ export function AuthProvider({ children }) {
     });
   };
 
-  // AÑADIR A  CARRITO
+  // --- LÓGICA DE CARRITO ---
   const addToCartLocally = (tripId) => {
     setCart((prev) => {
+      // Evitamos duplicados si el backend no lo controla
       if (prev.includes(tripId.toString())) return prev;
       const newCart = [...prev, tripId.toString()];
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      return newCart;
+    });
+  };
+
+  const removeFromCartLocally = (tripId) => {
+    setCart((prev) => {
+      const newCart = prev.filter((id) => id.toString() !== tripId.toString());
       localStorage.setItem("cart", JSON.stringify(newCart));
       return newCart;
     });
@@ -67,6 +76,7 @@ export function AuthProvider({ children }) {
         removeFavoriteLocally,
         cart,
         addToCartLocally,
+        removeFromCartLocally,
       }}
     >
       {children}

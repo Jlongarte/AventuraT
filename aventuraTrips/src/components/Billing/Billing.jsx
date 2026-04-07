@@ -49,7 +49,7 @@ function PaymentForm({ title }) {
             />
           </div>
 
-          {/* Full Name */}
+          {/* NOMBRE COMPLETO */}
           <div className="form-group full">
             <label>Full Name</label>
             <input
@@ -62,7 +62,7 @@ function PaymentForm({ title }) {
             />
           </div>
 
-          {/* Date of Birth */}
+          {/* FECHA DE NACIMIENTO */}
           <div className="form-group">
             <label>Date of Birth</label>
             <input
@@ -74,7 +74,7 @@ function PaymentForm({ title }) {
             />
           </div>
 
-          {/* Sex */}
+          {/* SEXO */}
           <div className="form-group">
             <label>Sex</label>
             <select
@@ -91,7 +91,7 @@ function PaymentForm({ title }) {
             </select>
           </div>
 
-          {/* Telephone */}
+          {/* TELEFONO */}
           <div className="form-group">
             <label>Telephone Number</label>
             <input
@@ -104,7 +104,7 @@ function PaymentForm({ title }) {
             />
           </div>
 
-          {/* ID / PASSPORT */}
+          {/* ID / PASSPORTE */}
           <div className="form-group">
             <label>ID / PASSPORT</label>
             <input
@@ -117,7 +117,7 @@ function PaymentForm({ title }) {
             />
           </div>
 
-          {/* Address Section */}
+          {/* DIRECCIÓN*/}
           <div className="form-group full" style={{ marginTop: "10px" }}>
             <hr />
             <p style={{ fontWeight: "bold", fontSize: "14px" }}>
@@ -125,7 +125,7 @@ function PaymentForm({ title }) {
             </p>
           </div>
 
-          {/* Street */}
+          {/* CALLE */}
           <div className="form-group">
             <label>Street</label>
             <input
@@ -138,7 +138,7 @@ function PaymentForm({ title }) {
             />
           </div>
 
-          {/* Number */}
+          {/* NUMERO*/}
           <div className="form-group">
             <label>Number</label>
             <input
@@ -151,7 +151,7 @@ function PaymentForm({ title }) {
             />
           </div>
 
-          {/* Post Code */}
+          {/* CÓDIGO POSTAL */}
           <div className="form-group">
             <label>Post Code</label>
             <input
@@ -164,7 +164,7 @@ function PaymentForm({ title }) {
             />
           </div>
 
-          {/* Country */}
+          {/* PAIS */}
           <div className="form-group">
             <label>Country</label>
             <input
