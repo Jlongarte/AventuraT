@@ -5,6 +5,7 @@ import App from "./App.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Home from "./pages/Home.jsx";
+import DatesPage from "./pages/Dates.jsx";
 import Destinations from "./pages/Destinations.jsx";
 import Offers from "./pages/Offers.jsx";
 import Team from "./pages/Team.jsx";
@@ -24,6 +25,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
             <Route path="destinations" element={<Destinations />} />
+            <Route path="dates" element={<DatesPage />} />
             <Route path="offers" element={<Offers />} />
             <Route path="team" element={<Team />} />
             <Route path="cart" element={<CartPage />} />
