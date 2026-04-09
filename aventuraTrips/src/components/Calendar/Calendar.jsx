@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Calendar.css";
 
 const monthsData = [
@@ -81,7 +82,7 @@ const Calendar = () => {
       <h1 className="calendar-title">Travel Calendar 2026</h1>
       <div className="calendar-grid">
         {monthsData.map((month) => (
-          <a href={month.link} key={month.id} className="month-card">
+          <Link to={month.link} key={month.id} className="month-card">
             <div
               className="month-image"
               style={{ backgroundImage: `url(${month.img})` }}
@@ -91,7 +92,7 @@ const Calendar = () => {
                 <span className="month-btn">EXPLORE</span>
               </div>
             </div>
-          </a>
+          </Link>
         ))}
       </div>
     </div>

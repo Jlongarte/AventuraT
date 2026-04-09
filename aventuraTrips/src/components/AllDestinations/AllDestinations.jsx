@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext"; // Importamos el context
-import Button from "../Button/Button.jsx";
+import { useAuth } from "../../context/AuthContext";
 import "./AllDestinations.css";
 
 const AllDestinations = ({
@@ -10,95 +9,160 @@ const AllDestinations = ({
   showButton = true,
   apiUrl,
   showDiscount = false,
+  filterMonth = "",
 }) => {
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // Extraemos tanto favorites como cart del context
   const { favorites, cart } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchTrips = async () => {
+    const fetchAllData = async () => {
       setLoading(true);
       try {
-        const url =
-          apiUrl ||
-          `https://api-project-jani-and-mat.com/api/general/getTrips/${page}`;
-        const res = await fetch(url);
-        const data = await res.json();
-        const tripsData = data.data || [];
+        // Si hay un mes seleccionado, escaneamos las páginas 1 a la 6 para encontrar viajes de todo el año
+        // Si no hay mes (Home), solo cargamos la página solicitada
+        const pagesToFetch = filterMonth ? [1, 2, 3, 4, 5, 6] : [page];
 
-        setTrips(tripsData);
-        if (setTotalTrips) setTotalTrips(tripsData.length);
+        const allPagesResults = await Promise.all(
+          pagesToFetch.map(async (p) => {
+            try {
+              const res = await fetch(
+                `https://api-project-jani-and-mat.com/api/general/getTrips/${p}`,
+              );
+              const data = await res.json();
+              return data?.data || [];
+            } catch (e) {
+              return []; // Si una página no existe, devolvemos array vacío
+            }
+          }),
+        );
 
-        setTimeout(() => setLoading(false), 100);
+        // Aplanamos todos los resultados en una sola lista de viajes básicos
+        const basicTrips = allPagesResults.flat();
+
+        // Eliminamos duplicados por ID por si acaso
+        const uniqueTrips = Array.from(
+          new Map(basicTrips.map((item) => [item.id, item])).values(),
+        );
+
+        // Buscamos el detalle de cada viaje para obtener el startDate que no viene en el listado
+        const fullTrips = await Promise.all(
+          uniqueTrips.map(async (trip) => {
+            try {
+              const detailRes = await fetch(
+                `https://api-project-jani-and-mat.com/api/general/getTrip/${trip.id}`,
+              );
+              const detailData = await detailRes.json();
+              return { ...trip, ...detailData.data };
+            } catch (err) {
+              return trip;
+            }
+          }),
+        );
+
+        setTrips(fullTrips);
+        if (setTotalTrips) setTotalTrips(fullTrips.length);
       } catch (error) {
-        console.error(error);
+        console.error("Error cargando datos del calendario:", error);
+      } finally {
         setLoading(false);
       }
     };
 
-    fetchTrips();
-  }, [page, apiUrl, setTotalTrips]);
+    fetchAllData();
+  }, [page, filterMonth]); // Se dispara cuando cambias de mes
 
-  // --- FILTRO COMBINADO (FAVORITOS + CARRITO) ---
-  // Solo mostramos los viajes cuyo ID NO esté en favorites Y NO esté en cart
   const filteredTrips = trips.filter((trip) => {
-    const tripIdStr = trip.id.toString();
-    const isInFavorites = favorites.includes(tripIdStr);
-    const isInCart = cart.includes(tripIdStr);
+    if (!trip?.id) return false;
+    const id = trip.id.toString();
 
-    // Retornamos true solo si NO está en ninguno de los dos
-    return !isInFavorites && !isInCart;
+    // Filtro de Favoritos y Carrito
+    if (favorites.includes(id) || cart.includes(id)) return false;
+
+    // Filtro por Mes
+    if (filterMonth) {
+      const dateStr = trip.startDate || "";
+      const parts = dateStr.split(/[\/-]/);
+
+      if (parts.length >= 2) {
+        let monthOfTrip = parts[1].trim();
+        if (monthOfTrip.length === 1) monthOfTrip = "0" + monthOfTrip;
+
+        return monthOfTrip === filterMonth;
+      }
+      return false;
+    }
+    return true;
   });
 
   return (
     <section className="destinations">
       <div className="container">
         <div className="discover">
-          <h2>Discover the World's Most Loved Destinations</h2>
-          {showButton && (
-            <Button
-              text="Book Your Trip"
-              className="primary"
-              onClick={() => navigate("/destinations")}
-            />
-          )}
+          <h2>
+            {filterMonth
+              ? `Exploring destinations for month ${filterMonth}`
+              : "Discover the World"}
+          </h2>
         </div>
 
         <div className={`trips-grid ${loading ? "loading-out" : "fade-in"}`}>
-          {filteredTrips.map((trip) => (
-            <Link
-              key={trip.id}
-              to={`/product/${trip.id}`}
-              className="trip-card"
+          {loading ? (
+            <div
+              style={{
+                gridColumn: "1/-1",
+                textAlign: "center",
+                padding: "50px",
+              }}
             >
-              <div className="image-wrapper">
-                <img src={trip.imageUrl} alt={trip.place} />
-                <div className="overlay"></div>
-              </div>
-              <div className="card-content">
-                <h3>{trip.place}</h3>
-                <p>{trip.title}</p>
-                <div className="meta">
-                  {showDiscount && trip.isDiscount && (
-                    <span className="discount">
-                      🔥 {trip.discountPercentage}% OFF
-                    </span>
-                  )}
-                  <span className="price">{trip.price}</span>
-                  <span className="rating">⭐ {trip.rating}</span>
+              <p>Scanning all trip pages for available dates... ✈️</p>
+            </div>
+          ) : filteredTrips.length > 0 ? (
+            filteredTrips.map((trip) => (
+              <Link
+                key={trip.id}
+                to={`/product/${trip.id}`}
+                className="trip-card"
+              >
+                <div className="image-wrapper">
+                  <img
+                    src={trip.imageUrls?.[0] || trip.imageUrl}
+                    alt={trip.place}
+                  />
+                  <div className="overlay"></div>
                 </div>
-              </div>
-            </Link>
-          ))}
-
-          {/* Mensaje dinámico si no quedan viajes por mostrar */}
-          {!loading && filteredTrips.length === 0 && (
-            <p className="no-trips-msg">
-              All available trips are already in your cart or wishlist! ✈️
-            </p>
+                <div className="card-content">
+                  <h3>{trip.place}</h3>
+                  <div
+                    className="trip-dates"
+                    style={{
+                      margin: "10px 0",
+                      color: "var(--main-color)",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    📅 {trip.startDate}
+                  </div>
+                  <div className="meta">
+                    <span className="price">{trip.price}</span>
+                  </div>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <div
+              style={{
+                gridColumn: "1/-1",
+                textAlign: "center",
+                padding: "80px",
+              }}
+            >
+              <h3>No trips found for month {filterMonth}</h3>
+              <p style={{ color: "gray" }}>
+                Try June, July or August to see results!
+              </p>
+            </div>
           )}
         </div>
       </div>

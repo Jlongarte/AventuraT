@@ -54,8 +54,6 @@ const Favorites = () => {
     }
   };
 
-  // --- LÓGICA DE MENSAJES CONDICIONALES ---
-
   if (!user) {
     return (
       <div className="login-required-message">

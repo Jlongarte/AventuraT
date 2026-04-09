@@ -1,0 +1,38 @@
+import { useParams } from "react-router-dom";
+import AllDestinations from "../AllDestinations/AllDestinations";
+
+const Month = () => {
+  const { monthName } = useParams();
+
+  const monthMap = {
+    january: "01",
+    february: "02",
+    march: "03",
+    april: "04",
+    may: "05",
+    june: "06",
+    july: "07",
+    august: "08",
+    september: "09",
+    october: "10",
+    november: "11",
+    december: "12",
+  };
+
+  const selectedMonth = monthMap[monthName?.toLowerCase()];
+
+  return (
+    <main className="month-results-page">
+      <header style={{ padding: "40px 20px", textAlign: "center" }}>
+        <h1 style={{ textTransform: "capitalize", fontSize: "2.5rem" }}>
+          Explore {monthName} 2026
+        </h1>
+        <p>Handpicked adventures for this time of the year.</p>
+      </header>
+
+      <AllDestinations filterMonth={selectedMonth} showButton={false} />
+    </main>
+  );
+};
+
+export default Month;

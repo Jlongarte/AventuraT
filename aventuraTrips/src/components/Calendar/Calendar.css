@@ -54,7 +54,7 @@
 }
 
 .month-card:hover .month-overlay {
-  background: rgba(0, 0, 0, 0.1); /* Se aclara al hacer hover */
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .month-name {
