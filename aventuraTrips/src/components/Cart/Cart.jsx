@@ -135,7 +135,7 @@ const Cart = () => {
               <h3>Total: {calculateTotal().toFixed(2)}€</h3>
               <p>{cartTrips.length} trips in your cart</p>
             </div>
-            <Link to={`/checkout/${cartTrips[0]?.id}`} className="checkout-btn">
+            <Link to="/checkout" className="checkout-btn">
               Proceed to Checkout
             </Link>
           </div>

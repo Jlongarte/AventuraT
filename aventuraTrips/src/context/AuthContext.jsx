@@ -105,6 +105,11 @@ export function AuthProvider({ children }) {
     });
   };
 
+  const clearCartLocally = () => {
+    setCart([]);
+    localStorage.setItem("cart", JSON.stringify([]));
+  };
+
   if (loading) {
     return (
       <div
@@ -151,6 +156,7 @@ export function AuthProvider({ children }) {
         cart,
         addToCartLocally,
         removeFromCartLocally,
+        clearCartLocally,
       }}
     >
       {children}

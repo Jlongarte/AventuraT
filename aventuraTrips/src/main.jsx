@@ -35,10 +35,8 @@ createRoot(document.getElementById("root")).render(
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="product/:id" element={<ProductPage />} />
-            <Route
-              path="checkout/:id"
-              element={<Payment title="Complete Your" />}
-            />
+            <Route path="checkout" element={<Payment />} />
+            <Route path="checkout/:id" element={<Payment />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
