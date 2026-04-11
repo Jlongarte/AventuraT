@@ -1,18 +1,18 @@
 //Barrel export
 
-import Home from "./pages/Home.jsx";
-import DatesPage from "./pages/Dates.jsx";
-import MonthPage from "./pages/MonthPage.jsx";
-import Destinations from "./pages/Destinations.jsx";
-import Offers from "./pages/Offers.jsx";
-import Team from "./pages/Team.jsx";
-import CartPage from "./pages/Cart.jsx";
-import Login from "./pages/Login.jsx";
-import Register from "./pages/Register.jsx";
-import NotFound from "./pages/NotFound.jsx";
-import ProductPage from "./pages/CardProducts.jsx";
-import Payment from "./pages/Payment.jsx";
-import WishList from "./pages/WishList.jsx";
+import Home from "./Home.jsx";
+import DatesPage from "./Dates.jsx";
+import MonthPage from "./MonthPage.jsx";
+import Destinations from "./Destinations.jsx";
+import Offers from "./Offers.jsx";
+import Team from "./Team.jsx";
+import CartPage from "./Cart.jsx";
+import Login from "./Login.jsx";
+import Register from "./Register.jsx";
+import NotFound from "./NotFound.jsx";
+import ProductPage from "./CardProducts.jsx";
+import Payment from "./Payment.jsx";
+import WishList from "./WishList.jsx";
 
 export {
   Home,
