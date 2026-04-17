@@ -1,4 +1,3 @@
-/* ===== CHECKOUT PAGE LAYOUT ===== */
 .checkout-page {
   padding: 40px 5%;
   max-width: 1200px;
@@ -12,7 +11,7 @@
   align-items: start;
 }
 
-/* ===== ORDER SUMMARY ===== */
+/* RESUMEN DE COMPRA */
 .order-summary {
   background: #f9fafb;
   border-radius: 22px;
@@ -98,7 +97,7 @@
   color: #111827;
 }
 
-/* ===== BILLING FORM ===== */
+/* FORMULARIO DE FACTURACIÓN */
 .billing-section h2 {
   font-size: 1.5rem;
   padding: 0;
@@ -172,7 +171,7 @@
   margin: 0;
 }
 
-/* Errors */
+/* Errores */
 .billing-form .form-errors {
   grid-column: 1 / -1;
   background: #fef2f2;
@@ -188,7 +187,6 @@
   margin: 4px 0;
 }
 
-/* Submit button */
 .billing-form .btn.submit {
   grid-column: 1 / -1;
   padding: 14px 16px;
@@ -199,7 +197,9 @@
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .billing-form .btn.submit:hover:not(:disabled) {
@@ -212,7 +212,7 @@
   cursor: not-allowed;
 }
 
-/* ===== SUCCESS STATE ===== */
+/* ===== ESTADO SUCCESS  ===== */
 .checkout-success {
   display: flex;
   justify-content: center;
@@ -321,7 +321,9 @@
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .success-actions .btn.submit:hover {
@@ -329,7 +331,7 @@
   transform: translateY(-2px);
 }
 
-/* ===== EMPTY / LOGIN / LOADING STATES ===== */
+/*  VACÍO / LOGIN / CARGANDO  */
 .checkout-login-required,
 .checkout-empty {
   display: flex;

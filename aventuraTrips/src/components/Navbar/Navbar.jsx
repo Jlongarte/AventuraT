@@ -7,7 +7,6 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // 1. Extraemos 'cart' del contexto junto a los demás datos
   const { user, logout, favorites, cart } = useAuth();
 
   const navigate = useNavigate();
@@ -20,6 +19,7 @@ const Navbar = () => {
   const handleLogout = () => {
     logout();
     setMenuOpen(false);
+    setIsOpen(false);
     navigate("/");
   };
 
@@ -34,8 +34,8 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`nav ${isOpen ? "active" : ""}`}>
-      <NavLink to="/" className="logo-link">
+    <nav className="nav">
+      <NavLink to="/" className="logo-link" onClick={() => setIsOpen(false)}>
         <img
           src="https://res.cloudinary.com/dzo0dufcr/image/upload/v1772454036/logoAventura_qge2md.webp"
           alt="logo"
@@ -43,15 +43,15 @@ const Navbar = () => {
         />
       </NavLink>
 
-      {/* Botón hamburguesa */}
-      <div className={`hamburger ${isOpen ? "open" : ""}`} onClick={toggleMenu}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
-      {/* Menú principal */}
+      {/* --- MENU LINKS --- */}
       <ul className={`nav-links ${isOpen ? "active" : ""}`}>
+        {/* BOTÓN CERRAR (Solo móvil) */}
+        <li className="mobile-only close-menu-container">
+          <button className="close-menu-btn" onClick={() => setIsOpen(false)}>
+            <i className="fa-solid fa-xmark"></i>
+          </button>
+        </li>
+
         <li>
           <NavLink to="/" onClick={() => setIsOpen(false)}>
             Home
@@ -78,66 +78,103 @@ const Navbar = () => {
           </NavLink>
         </li>
 
-        {/* ICONO DE CARRITO CON CONTADOR */}
-        <li>
+        {/* --- OPCIONES MÓVIL (Logueado) --- */}
+        {user && (
+          <>
+            <hr className="mobile-only divider" />
+            <li className="mobile-only">
+              <NavLink
+                to="/my-bookings"
+                className="btn-user"
+                onClick={() => setIsOpen(false)}
+              >
+                <i className="fa-solid fa-passport"></i> My Bookings
+              </NavLink>
+            </li>
+            <li className="mobile-only">
+              <button
+                onClick={handleLogout}
+                className="btn-user logout-mobile-btn"
+              >
+                <i className="fa-solid fa-right-from-bracket"></i> Logout
+              </button>
+            </li>
+          </>
+        )}
+
+        {/* --- OPCIONES MÓVIL (No logueado) --- */}
+        {!user && (
+          <>
+            <hr className="mobile-only divider" />
+            <li className="mobile-only">
+              <NavLink
+                to="/login"
+                className="btn-user"
+                onClick={() => setIsOpen(false)}
+              >
+                <i className="fa-regular fa-user"></i> Login
+              </NavLink>
+            </li>
+            <li className="mobile-only">
+              <NavLink
+                to="/register"
+                className="btn-user"
+                onClick={() => setIsOpen(false)}
+              >
+                <i className="fa-solid fa-user"></i> Register
+              </NavLink>
+            </li>
+          </>
+        )}
+
+        {/* --- ICONOS MÓVIL (Cart/Wishlist) --- */}
+        <li className="mobile-only mobile-icons-row">
           <NavLink
             to="/cart"
             onClick={() => setIsOpen(false)}
             className="cart-link"
           >
             <i className="fa-solid fa-cart-shopping"></i>
-            {/* 2. Mostramos el numero si hay productos en el carrito */}
-            {cart && cart.length > 0 && (
+            {cart?.length > 0 && (
               <span className="nav-cart-badge">{cart.length}</span>
             )}
           </NavLink>
-        </li>
-
-        {/* ICONO DE FAVORITOS CON CONTADOR */}
-        <li>
           <NavLink
             to="/wishlist"
             onClick={() => setIsOpen(false)}
             className="wishlist-link"
           >
             <i className="fa-regular fa-heart"></i>
-            {favorites && favorites.length > 0 && (
+            {favorites?.length > 0 && (
               <span className="nav-fav-badge">{favorites.length}</span>
             )}
           </NavLink>
         </li>
-
-        {/* Botones usuario solo visibles en móvil */}
-        {!user ? (
-          <>
-            <li className="btn-user mobile-only">
-              <i className="fa-regular fa-user"></i>
-              <NavLink to="/login" onClick={() => setIsOpen(false)}>
-                Login
-              </NavLink>
-            </li>
-            <li className="btn-user mobile-only">
-              <i className="fa-solid fa-user"></i>
-              <NavLink to="/register" onClick={() => setIsOpen(false)}>
-                Register
-              </NavLink>
-            </li>
-          </>
-        ) : (
-          <li className="mobile-only">
-            <button
-              onClick={handleLogout}
-              className="btn-user"
-              style={{ background: "none", color: "var(--secondary-color)" }}
-            >
-              <i className="fa-solid fa-right-from-bracket"></i>
-              Logout
-            </button>
-          </li>
-        )}
       </ul>
 
-      {/* Botones usuario (Desktop) */}
+      {/* --- ICONOS V. ESCRITORIO --- */}
+      <div className="nav-icons-desktop">
+        <NavLink to="/cart" className="cart-link">
+          <i className="fa-solid fa-cart-shopping"></i>
+          {cart?.length > 0 && (
+            <span className="nav-cart-badge">{cart.length}</span>
+          )}
+        </NavLink>
+        <NavLink to="/wishlist" className="wishlist-link">
+          <i className="fa-regular fa-heart"></i>
+          {favorites?.length > 0 && (
+            <span className="nav-fav-badge">{favorites.length}</span>
+          )}
+        </NavLink>
+      </div>
+
+      <div className="hamburger" onClick={toggleMenu}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      {/* --- MENÚ ESCRITORIO --- */}
       <ul className="user-links">
         {!user ? (
           <>
@@ -161,16 +198,20 @@ const Navbar = () => {
                 className={`fa-solid fa-chevron-${menuOpen ? "up" : "down"}`}
               ></i>
             </button>
-
             {menuOpen && (
               <ul className="user-dropdown">
                 <li className="dropdown-header">
                   <span>{user.name}</span>
                 </li>
                 <li>
+                  <NavLink to="/my-bookings" onClick={() => setMenuOpen(false)}>
+                    <i className="fa-solid fa-passport"></i> My Bookings
+                  </NavLink>
+                </li>
+                <hr className="dropdown-divider" />
+                <li>
                   <button onClick={handleLogout}>
-                    <i className="fa-solid fa-right-from-bracket"></i>
-                    Logout
+                    <i className="fa-solid fa-right-from-bracket"></i> Logout
                   </button>
                 </li>
               </ul>

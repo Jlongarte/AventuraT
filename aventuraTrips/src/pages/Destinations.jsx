@@ -8,7 +8,6 @@ const Destinations = () => {
 
   const handlePageChange = (newPage) => {
     setPage(newPage);
-    // Scroll suave hacia arriba
     window.scrollTo({
       top: 0,
       behavior: "smooth",

@@ -78,7 +78,7 @@ h2 > .red-color {
   font-size: 0.9rem;
 }
 
-/* ANIMACIÓN PARA LA PÁGINACIÓN, PARA QUE NO CAMBIE TAN BRUSCO */
+/* ANIMACIÓN PARA LA PÁGINACIÓN */
 .trips-grid {
   opacity: 1;
   transition:
@@ -120,7 +120,7 @@ h2 > .red-color {
   }
 
   .discover > h2 {
-    text-align: center;
+    text-align: center !important;
   }
   .trips-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -138,7 +138,7 @@ h2 > .red-color {
     align-items: center;
   }
   .discover > h2 {
-    text-align: center;
+    text-align: center !important;
   }
   .trips-grid {
     grid-template-columns: repeat(2, 1fr);

@@ -79,7 +79,7 @@ const monthsData = [
 const Calendar = () => {
   return (
     <div className="calendar-container">
-      <h1 className="calendar-title">Travel Calendar 2026</h1>
+      <h1 className="calendar-title">Travel Calendar </h1>
       <div className="calendar-grid">
         {monthsData.map((month) => (
           <Link to={month.link} key={month.id} className="month-card">

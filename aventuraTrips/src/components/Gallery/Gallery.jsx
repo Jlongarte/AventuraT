@@ -59,6 +59,7 @@ const Gallery = () => {
 
           <Button
             text="Explore More"
+            className="primary hide-on-mobile"
             icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +74,6 @@ const Gallery = () => {
                 <path d="M3 3l10 10M13 3h-10v10" />
               </svg>
             }
-            className="primary"
             onClick={() => navigate("/destinations")}
           />
         </div>

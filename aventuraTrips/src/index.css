@@ -55,7 +55,6 @@ ul {
   background-color: var(--hover);
 }
 
-/* Estilo cuando el botón está deshabilitado */
 .btn-page:disabled {
   background-color: #d1d5db;
   color: #9ca3af;
@@ -94,7 +93,7 @@ ul {
   }
 
   .container {
-    padding: 1rem;
+    padding: 2rem;
   }
 
   h2 {

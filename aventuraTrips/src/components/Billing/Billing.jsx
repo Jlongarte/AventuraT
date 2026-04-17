@@ -28,7 +28,6 @@ function PaymentForm() {
     country: "",
   });
 
-  // Load trips: single trip (from /checkout/:id) or full cart (from /checkout)
   useEffect(() => {
     const loadTrips = async () => {
       if (!user) {
@@ -40,14 +39,12 @@ function PaymentForm() {
         setLoadingTrips(true);
 
         if (id) {
-          // Single trip purchase - "Buy It Now"
           const res = await fetch(`${API_BASE}/api/general/getTrip/${id}`);
           const json = await res.json();
           if (json.data) {
             setTrips([json.data]);
           }
         } else {
-          // Full cart purchase
           const res = await fetch(`${API_BASE}/api/customer/getCart`, {
             headers: { Authorization: `Bearer ${user.token}` },
           });
@@ -64,7 +61,7 @@ function PaymentForm() {
     loadTrips();
   }, [id, user]);
 
-  // Pre-fill email from user
+  // Pre-rellenado del email si el usuario está logueado
   useEffect(() => {
     if (user?.email) {
       setFormData((prev) => ({ ...prev, email: user.email }));
@@ -153,10 +150,8 @@ function PaymentForm() {
         trips.forEach((t) => removeFavoriteLocally(t.id));
         setSuccessData(json.data);
       } else {
-        // Parse backend errors
+        // Parseamos errores
         if (Array.isArray(json.data)) {
-          // Validation errors return readable messages, but
-          // InsufficientStockException returns trip IDs — use message instead
           if (json.status === "Conflict") {
             setErrors([json.message]);
           } else {
@@ -171,13 +166,15 @@ function PaymentForm() {
         }
       }
     } catch {
-      setErrors(["Connection error. Please check your internet and try again."]);
+      setErrors([
+        "Connection error. Please check your internet and try again.",
+      ]);
     } finally {
       setSubmitting(false);
     }
   };
 
-  // Not logged in
+  // Si el usuario no stá registrado
   if (!user) {
     return (
       <div className="checkout-login-required">
@@ -189,12 +186,10 @@ function PaymentForm() {
     );
   }
 
-  // Loading trips
   if (loadingTrips) {
     return <div className="checkout-loading">Loading checkout...</div>;
   }
 
-  // No trips
   if (trips.length === 0 && !successData) {
     return (
       <div className="checkout-empty">
@@ -207,7 +202,6 @@ function PaymentForm() {
     );
   }
 
-  // Success state
   if (successData) {
     return (
       <section className="checkout-success">
@@ -236,7 +230,8 @@ function PaymentForm() {
           </div>
 
           <p className="success-email-note">
-            A confirmation email has been sent to <strong>{formData.email}</strong>
+            A confirmation email has been sent to{" "}
+            <strong>{formData.email}</strong>
           </p>
 
           <div className="success-actions">
@@ -252,7 +247,6 @@ function PaymentForm() {
   return (
     <section className="checkout-page">
       <div className="checkout-container">
-        {/* Order Summary */}
         <div className="order-summary">
           <h2>
             Order <span className="red-color">Summary</span>
@@ -280,7 +274,7 @@ function PaymentForm() {
           </div>
         </div>
 
-        {/* Billing Form */}
+        {/* Formulario de Pago */}
         <div className="billing-section">
           <h2>
             Billing <span className="red-color">Details</span>
@@ -407,7 +401,7 @@ function PaymentForm() {
               />
             </div>
 
-            {/* Errors */}
+            {/* Errores */}
             {errors.length > 0 && (
               <div className="form-errors">
                 {errors.map((err, i) => (
@@ -417,7 +411,9 @@ function PaymentForm() {
             )}
 
             <button type="submit" className="btn submit" disabled={submitting}>
-              {submitting ? "Processing..." : `PAY ${calculateTotal().toFixed(2)}€`}
+              {submitting
+                ? "Processing..."
+                : `PAY ${calculateTotal().toFixed(2)}€`}
               {!submitting && <span> ↘</span>}
             </button>
           </form>

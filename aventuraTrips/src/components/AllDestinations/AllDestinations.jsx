@@ -7,23 +7,18 @@ const AllDestinations = ({
   page = 1,
   setTotalTrips,
   showButton = true,
-  apiUrl,
-  showDiscount = false,
   filterMonth = "",
+  monthLabel = "",
 }) => {
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
   const { favorites, cart } = useAuth();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAllData = async () => {
       setLoading(true);
       try {
-        // Si hay un mes seleccionado, escaneamos las páginas 1 a la 6 para encontrar viajes de todo el año
-        // Si no hay mes (Home), solo cargamos la página solicitada
         const pagesToFetch = filterMonth ? [1, 2, 3, 4, 5, 6] : [page];
-
         const allPagesResults = await Promise.all(
           pagesToFetch.map(async (p) => {
             try {
@@ -33,22 +28,21 @@ const AllDestinations = ({
               const data = await res.json();
               return data?.data || [];
             } catch (e) {
-              return []; // Si una página no existe, devolvemos array vacío
+              return [];
             }
           }),
         );
 
-        // Aplanamos todos los resultados en una sola lista de viajes básicos
         const basicTrips = allPagesResults.flat();
 
-        // Eliminamos duplicados por ID por si acaso
         const uniqueTrips = Array.from(
           new Map(basicTrips.map((item) => [item.id, item])).values(),
         );
 
-        // Buscamos el detalle de cada viaje para obtener el startDate que no viene en el listado
         const fullTrips = await Promise.all(
           uniqueTrips.map(async (trip) => {
+            if (trip.startDate) return trip;
+
             try {
               const detailRes = await fetch(
                 `https://api-project-jani-and-mat.com/api/general/getTrip/${trip.id}`,
@@ -64,23 +58,21 @@ const AllDestinations = ({
         setTrips(fullTrips);
         if (setTotalTrips) setTotalTrips(fullTrips.length);
       } catch (error) {
-        console.error("Error cargando datos del calendario:", error);
+        console.error("Error cargando datos:", error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchAllData();
-  }, [page, filterMonth]); // Se dispara cuando cambias de mes
+  }, [page, filterMonth]);
 
   const filteredTrips = trips.filter((trip) => {
     if (!trip?.id) return false;
     const id = trip.id.toString();
 
-    // Filtro de Favoritos y Carrito
     if (favorites.includes(id) || cart.includes(id)) return false;
 
-    // Filtro por Mes
     if (filterMonth) {
       const dateStr = trip.startDate || "";
       const parts = dateStr.split(/[\/-]/);
@@ -88,7 +80,6 @@ const AllDestinations = ({
       if (parts.length >= 2) {
         let monthOfTrip = parts[1].trim();
         if (monthOfTrip.length === 1) monthOfTrip = "0" + monthOfTrip;
-
         return monthOfTrip === filterMonth;
       }
       return false;
@@ -100,9 +91,9 @@ const AllDestinations = ({
     <section className="destinations">
       <div className="container">
         <div className="discover">
-          <h2>
+          <h2 style={{ textTransform: "capitalize" }}>
             {filterMonth
-              ? `Exploring destinations for month ${filterMonth}`
+              ? `Exploring destinations for ${monthLabel || filterMonth}`
               : "Discover the World"}
           </h2>
         </div>
@@ -116,7 +107,7 @@ const AllDestinations = ({
                 padding: "50px",
               }}
             >
-              <p>Scanning all trip pages for available dates... ✈️</p>
+              <p>Scanning trips... ✈️</p>
             </div>
           ) : filteredTrips.length > 0 ? (
             filteredTrips.map((trip) => (
@@ -158,10 +149,7 @@ const AllDestinations = ({
                 padding: "80px",
               }}
             >
-              <h3>No trips found for month {filterMonth}</h3>
-              <p style={{ color: "gray" }}>
-                Try June, July or August to see results!
-              </p>
+              <h3>No trips found</h3>
             </div>
           )}
         </div>

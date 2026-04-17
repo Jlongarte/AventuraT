@@ -194,6 +194,47 @@
   border: 1px solid #e5e7eb;
 }
 
+/*  MODO BOOKED */
+
+.status-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f0fdf4;
+  color: #166534;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #bbf7d0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-banner i {
+  color: #22c55e;
+  font-size: 18px;
+}
+
+.second-btn.booked-status {
+  background-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.second-btn.booked-status:hover {
+  background-color: #e5e7eb;
+  opacity: 1;
+}
+
+.buy-now {
+  filter: brightness(1.1);
+}
+
+.booked-mode {
+  display: flex;
+  flex-direction: column;
+}
+
 /* =======================
         RESPONSIVE
 ======================= */

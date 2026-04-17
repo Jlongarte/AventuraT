@@ -30,7 +30,11 @@ const Month = () => {
         <p>Handpicked adventures for this time of the year.</p>
       </header>
 
-      <AllDestinations filterMonth={selectedMonth} showButton={false} />
+      <AllDestinations
+        filterMonth={selectedMonth}
+        monthLabel={monthName}
+        showButton={false}
+      />
     </main>
   );
 };

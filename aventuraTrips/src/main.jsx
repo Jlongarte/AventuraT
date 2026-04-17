@@ -18,6 +18,7 @@ import {
   ProductPage,
   Payment,
   WishList,
+  MyBookings,
 } from "./pages";
 
 createRoot(document.getElementById("root")).render(
@@ -39,6 +40,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="product/:id" element={<ProductPage />} />
             <Route path="checkout" element={<Payment />} />
             <Route path="checkout/:id" element={<Payment />} />
+            <Route path="/my-bookings" element={<MyBookings />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

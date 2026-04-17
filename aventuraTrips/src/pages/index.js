@@ -13,6 +13,7 @@ import NotFound from "./NotFound.jsx";
 import ProductPage from "./CardProducts.jsx";
 import Payment from "./Payment.jsx";
 import WishList from "./WishList.jsx";
+import MyBookings from "./MyBookings.jsx";
 
 export {
   Home,
@@ -28,4 +29,5 @@ export {
   ProductPage,
   Payment,
   WishList,
+  MyBookings,
 };

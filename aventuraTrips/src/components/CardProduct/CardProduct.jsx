@@ -1,10 +1,11 @@
 import "./CardProduct.css";
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom"; // Importamos useLocation
 import { useAuth } from "../../context/AuthContext";
 
 const CardProduct = () => {
   const { id } = useParams();
+  const location = useLocation(); // Hook para recibir el state del Link
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
   const [loading, setLoading] = useState(true);
@@ -12,6 +13,9 @@ const CardProduct = () => {
   const [showToast, setShowToast] = useState({ show: false, message: "" });
   const { user, favorites, addFavoriteLocally, cart, addToCartLocally } =
     useAuth();
+
+  // Detectamos si venimos desde MyTrips
+  const isFromBooking = location.state?.fromBooking || false;
 
   const isFav = favorites.some((favId) => favId.toString() === id.toString());
   const isInCart = cart.some((cartId) => cartId.toString() === id.toString());
@@ -174,31 +178,41 @@ const CardProduct = () => {
           <p className="description">{product.description}</p>
         </div>
 
-        <div className="actions">
-          {!isFav ? (
-            <button className="second-btn" onClick={handleAddToFavorite}>
-              Add to Favorites
-            </button>
-          ) : (
-            <button className="second-btn already-fav" disabled>
-              Saved in Favorites
-            </button>
-          )}
+        {/* SI NO VIENE DE BOOKING, MUESTRA LOS BOTONES */}
+        {!isFromBooking ? (
+          <div className="actions">
+            {!isFav ? (
+              <button className="second-btn" onClick={handleAddToFavorite}>
+                Add to Favorites
+              </button>
+            ) : (
+              <button className="second-btn already-fav" disabled>
+                Saved in Favorites
+              </button>
+            )}
 
-          {!isInCart ? (
-            <button className="second-btn" onClick={handleAddToCart}>
-              Add to Cart
-            </button>
-          ) : (
-            <Link to="/cart" className="second-btn in-cart-link">
-              View in Cart
+            {!isInCart ? (
+              <button className="second-btn" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
+            ) : (
+              <Link to="/cart" className="second-btn in-cart-link">
+                View in Cart
+              </Link>
+            )}
+
+            <Link to={`/checkout/${id}`} className="second-btn buy-now-link">
+              Buy It Now
             </Link>
-          )}
-
-          <Link to={`/checkout/${id}`} className="second-btn buy-now-link">
-            Buy It Now
-          </Link>
-        </div>
+          </div>
+        ) : (
+          /* MENSAJE SI YA ESTÁ COMPRADO */
+          <div className="actions">
+            <div className="already-booked-msg">
+              ✅ This trip is already in your bookings
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

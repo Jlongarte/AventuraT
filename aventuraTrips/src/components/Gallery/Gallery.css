@@ -81,6 +81,9 @@
   transform: translateY(0);
 }
 
+.hide-on-mobile {
+  display: flex;
+}
 /* ===============================
              VERSIÓN TABLET 
 =============================== */
@@ -104,5 +107,9 @@
   .gallery-grid .item-1,
   .gallery-grid .item-9 {
     grid-column: span 2;
+  }
+
+  .hide-on-mobile {
+    display: none !important;
   }
 }
