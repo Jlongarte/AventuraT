@@ -83,7 +83,7 @@ function PaymentForm() {
 
   const formatDateForBackend = (dateStr) => {
     if (!dateStr) return "";
-    // Input type="date" gives YYYY-MM-DD, backend expects MM/dd/yyyy
+    // Input type="date" da YYYY-MM-DD, backend espera MM/dd/yyyy
     const [year, month, day] = dateStr.split("-");
     return `${month}/${day}/${year}`;
   };
@@ -92,7 +92,7 @@ function PaymentForm() {
     e.preventDefault();
     setErrors([]);
 
-    // Client-side validation
+    // Validación parte cliente
     const validationErrors = [];
     if (!formData.email) validationErrors.push("Email is required");
     if (!formData.fullName) validationErrors.push("Full name is required");
@@ -274,7 +274,7 @@ function PaymentForm() {
           </div>
         </div>
 
-        {/* Formulario de Pago */}
+        {/* Formulario de Facturación */}
         <div className="billing-section">
           <h2>
             Billing <span className="red-color">Details</span>
@@ -351,7 +351,6 @@ function PaymentForm() {
               />
             </div>
 
-            {/* Address */}
             <div className="form-group full form-separator">
               <hr />
               <p className="section-label">Address Details</p>

@@ -18,7 +18,6 @@ const Cart = () => {
 
       // Convertimos a número decimal
       const priceValue = parseFloat(priceString) || 0;
-
       return acc + priceValue;
     }, 0);
   };

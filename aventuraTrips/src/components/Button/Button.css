@@ -16,13 +16,10 @@
   border: 2px solid transparent;
   cursor: pointer;
   overflow: hidden;
-
   width: 220px;
   min-width: 220px;
   max-width: 220px;
-
   flex: none;
-
   transition:
     background-color 0.4s ease,
     color 0.4s ease,

@@ -1,3 +1,4 @@
+import "./Month.css";
 import { useParams } from "react-router-dom";
 import AllDestinations from "../AllDestinations/AllDestinations";
 
@@ -23,10 +24,8 @@ const Month = () => {
 
   return (
     <main className="month-results-page">
-      <header style={{ padding: "40px 20px", textAlign: "center" }}>
-        <h1 style={{ textTransform: "capitalize", fontSize: "2.5rem" }}>
-          Explore {monthName} 2026
-        </h1>
+      <header>
+        <h1>Explore {monthName} 2026</h1>
         <p>Handpicked adventures for this time of the year.</p>
       </header>
 

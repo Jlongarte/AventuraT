@@ -19,7 +19,7 @@
 
 .month-card {
   text-decoration: none;
-  color: white;
+  color: var(--secondary-color);
   border-radius: 20px;
   overflow: hidden;
   height: 200px;
@@ -80,5 +80,5 @@
 
 .month-card:hover .month-btn {
   background: var(--main-color);
-  color: white;
+  color: var(--secondary-color);
 }

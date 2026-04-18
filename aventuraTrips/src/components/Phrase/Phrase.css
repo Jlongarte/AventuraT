@@ -3,7 +3,7 @@
   margin: 0rem 3rem 3rem 3rem !important;
 }
 .final-phrase {
-  color: white;
+  color: var(--secondary-color);
   font-size: 4rem;
 }
 

@@ -23,7 +23,7 @@
 
 .trip-step-card:hover {
   background-color: #1c1c1c;
-  color: #fff;
+  color: var(--secondary-color);
   transform: translateY(-5px);
 }
 
@@ -59,7 +59,7 @@
 }
 
 .trip-step-card:hover .trip-step-heading {
-  color: #fff;
+  color: var(--secondary-color);
 }
 
 .trip-step-heading i {

@@ -41,7 +41,7 @@
   display: flex;
   gap: 14px;
   align-items: center;
-  background: white;
+  background: var(--secondary-color);
   border-radius: 14px;
   padding: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -106,7 +106,7 @@
 }
 
 .billing-form {
-  background: #fff;
+  background: var(--secondary-color);
   padding: 30px;
   border-radius: 22px;
   box-shadow: 0 0 0 1px #eee;
@@ -191,7 +191,7 @@
   grid-column: 1 / -1;
   padding: 14px 16px;
   background: var(--main-color);
-  color: white;
+  color: var(--secondary-color);
   border: none;
   border-radius: 40px;
   font-size: 15px;
@@ -220,7 +220,7 @@
 }
 
 .success-card {
-  background: white;
+  background: var(--secondary-color);
   border-radius: 22px;
   padding: 50px 40px;
   max-width: 550px;
@@ -315,7 +315,7 @@
   text-decoration: none;
   padding: 14px 32px;
   background: var(--main-color);
-  color: white;
+  color: var(--secondary-color);
   border: none;
   border-radius: 40px;
   font-size: 15px;
@@ -355,7 +355,7 @@
 
 .checkout-login-btn:hover {
   background-color: #111827;
-  color: white;
+  color: var(--secondary-color);
 }
 
 .checkout-loading {

@@ -23,6 +23,7 @@ h2 > .red-color {
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
   text-decoration: none !important;
   color: inherit;
+  position: relative;
 }
 
 .trip-card:hover {
@@ -30,6 +31,7 @@ h2 > .red-color {
 }
 
 .image-wrapper {
+  position: relative;
   border-radius: 22px;
   overflow: hidden;
   aspect-ratio: 4 / 3;
@@ -42,7 +44,6 @@ h2 > .red-color {
   object-fit: cover;
   transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-
 .trip-card:hover img {
   transform: scale(1.14);
 }
@@ -61,21 +62,28 @@ h2 > .red-color {
   font-size: 13px;
   color: #6b7280;
   line-height: 1.5;
-  margin: 0;
+  margin: 4px 0 0;
 }
 
-.meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding-right: 24px;
+.discount-tag {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #ff385c;
+  color: var(--secondary-color);
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-weight: 900;
+  font-size: 14px;
+  z-index: 5;
 }
 
 .original-price {
   text-decoration: line-through;
   color: #888;
-  margin-left: 0.5rem;
+  margin-left: 8px;
   font-size: 0.9rem;
+  font-weight: 400;
 }
 
 /* ANIMACIÓN PARA LA PÁGINACIÓN */
@@ -106,6 +114,34 @@ h2 > .red-color {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Estilo  del botón de páginación página All Destinations */
+.btn-page {
+  background-color: var(--main-color);
+  color: var(--secondary-color);
+  padding: 8px 16px;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-page:hover:not(:disabled) {
+  background-color: var(--hover);
+}
+
+.btn-page:disabled {
+  background-color: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.trip-dates {
+  margin: 10px 0;
+  color: var(--main-color);
+  font-weight: bold;
 }
 /* ===============================
              VERSIÓN TABLET 

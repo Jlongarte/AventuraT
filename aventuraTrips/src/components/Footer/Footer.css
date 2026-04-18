@@ -6,7 +6,6 @@ footer {
   justify-content: center;
   align-items: flex-start;
   padding: 4rem;
-
   flex-wrap: wrap;
 }
 
@@ -77,6 +76,8 @@ h4 > .white-color {
 .footer-link {
   color: white;
   text-decoration: none;
+  display: block;
+  text-align: center;
 }
 .footer-link:hover {
   cursor: pointer;

@@ -6,7 +6,7 @@
 }
 
 .form-card {
-  background: #fff;
+  background: var(--secondary-color);
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0 0 0 1px #eee;
@@ -53,7 +53,7 @@ textarea:focus {
 
 .btn.submit:hover {
   background-color: var(--hover);
-  color: white;
+  color: var(--secondary-color);
 }
 
 .email-p {

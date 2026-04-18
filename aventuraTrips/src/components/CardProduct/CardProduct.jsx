@@ -1,6 +1,6 @@
 import "./CardProduct.css";
 import { useEffect, useState } from "react";
-import { useParams, Link, useLocation } from "react-router-dom"; // Importamos useLocation
+import { useParams, Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 const CardProduct = () => {
