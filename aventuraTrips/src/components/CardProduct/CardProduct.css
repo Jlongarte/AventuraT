@@ -235,11 +235,10 @@
   flex-direction: column;
 }
 
-/* =======================
-        RESPONSIVE
-======================= */
+/* ===============================
+             VERSIÓN TABLET 
+=============================== */
 
-/* TABLET */
 @media (min-width: 768px) and (max-width: 1024px) {
   .product-container {
     flex-direction: column;
@@ -264,8 +263,9 @@
     font-size: 14px;
   }
 }
-
-/* MOBILE */
+/* ===============================
+   MOBILE — hasta 767px
+=============================== */
 @media (max-width: 767px) {
   body {
     background: var(--secondary-color);

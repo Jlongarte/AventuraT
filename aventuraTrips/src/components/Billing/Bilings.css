@@ -372,8 +372,11 @@
   margin: 0;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1024px) {
+/* ===============================
+             VERSIÓN TABLET 
+=============================== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
   .checkout-container {
     grid-template-columns: 1fr;
   }
@@ -383,11 +386,16 @@
   }
 }
 
-@media (max-width: 640px) {
+/* ===============================
+   MOBILE — hasta 767px
+=============================== */
+@media (max-width: 767px) {
   .checkout-page {
     padding: 20px 4%;
   }
-
+  .checkout-container {
+    grid-template-columns: 1fr;
+  }
   .billing-form {
     grid-template-columns: 1fr;
     padding: 20px;
@@ -411,5 +419,9 @@
 
   .success-card {
     padding: 30px 20px;
+  }
+
+  .order-summary {
+    position: static;
   }
 }

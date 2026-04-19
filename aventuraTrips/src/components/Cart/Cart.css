@@ -102,20 +102,30 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsivo */
-@media (max-width: 1024px) {
+/* ===============================
+             VERSIÓN TABLET 
+=============================== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
   .trips-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .cart-container {
+    min-height: 70vh;
+  }
 }
 
-@media (max-width: 640px) {
+/* ===============================
+   MOBILE — hasta 767px
+=============================== */
+@media (max-width: 767px) {
   .trips-grid {
     grid-template-columns: 1fr;
   }
+
   .cart-summary {
     flex-direction: column;
-    text-align: center;
     gap: 20px;
+    text-align: center;
   }
 }

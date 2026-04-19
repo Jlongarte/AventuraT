@@ -74,13 +74,25 @@ const Hero = () => {
   return (
     <section className="hero" id="hero" ref={heroRef}>
       <div className="container">
+        {/* Capa de video de fondo */}
         <div className="hero-bg">
-          <video autoPlay muted loop playsInline className="hero-video">
-            <source src="/assets/AdobeStock_118726863.mov" type="video/mp4" />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="hero-video"
+            poster="https://res.cloudinary.com/dzo0dufcr/video/upload/so_0/f_auto,q_auto/v1776585407/AdobeStock_118726863_lhyznb.jpg"
+          >
+            <source
+              src="https://res.cloudinary.com/dzo0dufcr/video/upload/q_auto/f_auto/v1776585407/AdobeStock_118726863_lhyznb.mp4"
+              type="video/mp4"
+            />
             Your browser does not support video.
           </video>
         </div>
 
+        {/* Capa de burbujas decorativas */}
         <div className="bubbles">
           {bubblesData.map((bubble, i) => (
             <img
@@ -94,10 +106,9 @@ const Hero = () => {
           ))}
         </div>
 
+        {/* Contenido principal */}
         <div className="hero-content">
-          <h1 className="hero-title">
-            Discover Your Next Great <br /> Adventure
-          </h1>
+          <h1 className="hero-title">Discover Your Next Great Adventure</h1>
 
           <div className="hero-buttons">
             <Button

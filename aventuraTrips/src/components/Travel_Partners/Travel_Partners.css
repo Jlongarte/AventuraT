@@ -67,8 +67,10 @@
   }
 }
 
-/* responsive */
-@media (max-width: 768px) {
+/* ===============================
+   MOBILE — hasta 767px
+=============================== */
+@media (max-width: 767px) {
   .partner-item {
     padding: 0 25px;
   }

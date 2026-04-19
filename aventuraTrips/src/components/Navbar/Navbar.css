@@ -63,6 +63,12 @@
 }
 
 /* BOTONES DE USUARIO (Global)  */
+.user-links {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 .btn-user {
   display: inline-flex;
   align-items: center;
@@ -272,6 +278,9 @@
     justify-content: center;
   }
 
+  .mobile-only .btn-user {
+    padding: 10px 20px;
+  }
   .mobile-icons-row {
     display: flex !important;
     gap: 40px;
@@ -289,6 +298,7 @@
   .logout-mobile-btn {
     border-color: rgba(255, 255, 255, 0.3);
     background-color: rgba(255, 0, 0, 0.1);
+    padding: 10px 20px;
   }
 }
 

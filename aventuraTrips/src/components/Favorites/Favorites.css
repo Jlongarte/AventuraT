@@ -85,14 +85,23 @@
   text-align: center;
   font-size: 1.5rem;
 }
-/*  móviles */
-@media (max-width: 1024px) {
+/* ===============================
+             VERSIÓN TABLET 
+=============================== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
   .trips-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .favorites-container {
+    min-height: 70vh;
+  }
 }
 
-@media (max-width: 640px) {
+/* ===============================
+   MOBILE — hasta 767px
+=============================== */
+@media (max-width: 767px) {
   .trips-grid {
     grid-template-columns: 1fr;
   }
