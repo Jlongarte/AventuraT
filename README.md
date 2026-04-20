@@ -54,28 +54,28 @@ Todas las imágenes de destinos y recursos gráficos han sido generadas mediante
 
 ---
 
-## 🚀 8. TRABAJOS FUTUROS Y ESCALABILIDAD
+## 🚀 TRABAJOS FUTUROS Y ESCALABILIDAD
 
 Tras la culminación de la fase actual de **AventuraTrips**, se han identificado diversas líneas de expansión que permitirían escalar el proyecto hacia una plataforma comercialmente competitiva. 
 Los desarrollos futuros se estructuran en cuatro ejes estratégicos:
 
-### 8.1 Portal de Gestión B2B (Dashboard para Empresas)
+### 1 Portal de Gestión B2B (Dashboard para Empresas)
 Aunque el sistema actual ya soporta el rol de `Company` a nivel de API y base de datos, el objetivo es evolucionar hacia una plataforma de autoservicio mediante un **Dashboard especializado**. Esto permitirá a los partners:
 * **Autogestión de inventario:** Interfaz intuitiva para crear, editar y retirar paquetes turísticos en tiempo real sin intervención técnica.
 * **Analítica de ventas:** Panel de visualización con métricas sobre destinos populares y volumen de facturación.
 * **Gestión dinámica de Guías:** Herramientas para asignar guías según disponibilidad y especialización técnica.
 
-### 8.2 Expansión del Catálogo y Nuevas Verticales
+### 2 Expansión del Catálogo y Nuevas Verticales
 Para posicionar la marca como referente, se proyecta una expansión masiva del catálogo:
 * **Cobertura Global:** Incremento de la base de datos para cubrir destinos en los cinco continentes.
 * **Micro-experiencias:** Integración de una vertical de **Excursiones de un día** y actividades locales, permitiendo al usuario complementar sus viajes principales con experiencias puntuales de corta duración.
 
-### 8.3 Optimización del Motor de Búsqueda y UX
+### 3 Optimización del Motor de Búsqueda y UX
 Con el fin de mejorar la tasa de conversión, se implementará un **Sistema de Búsqueda Avanzada** en el Frontend que incluya:
 * **Filtrado Multicriterio:** Búsqueda por destino, país, rango de precios y categorías temáticas.
 * **Selector de Fechas Dinámico:** Integración de un calendario que consulte en tiempo real el stock del backend, mostrando únicamente los paquetes con disponibilidad confirmada en las fechas seleccionadas.
 
-### 8.4 Sistema de Feedback y Prueba Social (Social Proof)
+### 4 Sistema de Feedback y Prueba Social (Social Proof)
 Para aumentar la confianza del consumidor, se activará el modelo de **Comentarios y Valoraciones**, aprovechando la entidad `comments` ya definida en el esquema de la base de datos:
 * **Reseñas Verificadas:** Implementación de lógica de negocio que permita comentar únicamente a usuarios con el estatus de viaje "comprado".
 * **Cálculo Dinámico de Ratings:** Sistema automatizado para mostrar la media de valoraciones tanto en el detalle del producto como en las *cards* del catálogo general.
