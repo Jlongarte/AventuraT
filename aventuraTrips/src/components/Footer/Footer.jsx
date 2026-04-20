@@ -196,7 +196,7 @@ const Footer = () => {
         <ul className="center">
           <li>
             <a
-              href="https://personalportfoliojanire2025.netlify.app/"
+              href="https://janire-personal-portfolio.netlify.app/"
               target="_blank"
               className="footer-link"
               rel="noreferrer"
@@ -206,7 +206,7 @@ const Footer = () => {
           </li>
           <li>
             <a
-              href="https://cv-janire-gonzalez-garayoa.netlify.app/CV-PROYECTO.pdf"
+              href="https://www.linkedin.com/in/janire-gonzalez-garayoa"
               target="_blank"
               className="footer-link"
               rel="noreferrer"

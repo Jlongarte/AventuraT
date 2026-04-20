@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./AllDestinations.css";
@@ -77,27 +77,27 @@ const AllDestinations = ({
   }, [page, filterMonth, apiUrl]);
 
   // Lógica de filtrado
-  const filteredTrips = trips.filter((trip) => {
-    if (!trip?.id) return false;
-    const id = trip.id.toString();
+  const filteredTrips = useMemo(() => {
+    return trips.filter((trip) => {
+      if (!trip?.id) return false;
+      const id = trip.id.toString();
 
-    // No mostrar si ya está en favoritos o carrito
-    if (favorites.includes(id) || cart.includes(id)) return false;
+      // Filtro de favoritos/carrito
+      if (favorites.includes(id) || cart.includes(id)) return false;
 
-    // Filtrado por mes
-    if (filterMonth) {
-      const dateStr = trip.startDate || "";
-      const parts = dateStr.split(/[\/-]/);
-
-      if (parts.length >= 2) {
-        let monthOfTrip = parts[1].trim();
-        if (monthOfTrip.length === 1) monthOfTrip = "0" + monthOfTrip;
-        return monthOfTrip === filterMonth;
+      // Filtrado por mes
+      if (filterMonth) {
+        const dateStr = trip.startDate || "";
+        const parts = dateStr.split(/[\/-]/);
+        if (parts.length >= 2) {
+          let monthOfTrip = parts[1].trim().padStart(2, "0");
+          return monthOfTrip === filterMonth;
+        }
+        return false;
       }
-      return false;
-    }
-    return true;
-  });
+      return true;
+    });
+  }, [trips, favorites, cart, filterMonth]); // Solo se recalcula si algo de esto cambia
 
   return (
     <section className="destinations">
