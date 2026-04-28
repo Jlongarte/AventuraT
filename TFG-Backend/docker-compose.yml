@@ -1,0 +1,39 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DATASOURCE_URL=jdbc:mysql://mysqldb:3306/tfg?allowPublicKeyRetrieval=true&useSSL=false
+      - DATASOURCE_USERNAME=${DATASOURCE_USERNAME}
+      - DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRATION=${JWT_EXPIRATION}
+      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
+      - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
+      - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - RESEND_DOMAIN=${RESEND_DOMAIN}
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    restart: always
+
+  mysqldb:
+    image: mysql:8.4
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DATASOURCE_PASSWORD}
+      - MYSQL_DATABASE=tfg
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+volumes:
+  mysql-data:

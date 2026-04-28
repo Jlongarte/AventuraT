@@ -1,0 +1,165 @@
+footer {
+  width: 100%;
+  background-color: rgb(35, 35, 35);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem;
+  flex-wrap: wrap;
+}
+
+footer > article {
+  width: 20%;
+}
+
+footer > article footer > article > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+footer > article > h4 {
+  margin: 20px 0px;
+  text-align: center;
+}
+
+footer > article > div > h4 {
+  margin: 20px 0px;
+  text-align: center;
+}
+footer > article > ul > li {
+  list-style: none;
+}
+footer > article > ul > li > a {
+  color: white;
+  text-decoration: none;
+}
+
+footer article:nth-child(2) ul li {
+  text-align: center;
+}
+
+footer article:nth-child(2) div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.valoraciones {
+  text-align: center;
+}
+.app {
+  width: 18px;
+  height: 18px;
+}
+
+.work {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.work > h6 {
+  margin-top: -17px;
+}
+h4 > .red-color {
+  color: var(--main-color);
+  letter-spacing: 1px;
+}
+
+h4 > .white-color {
+  color: white;
+  letter-spacing: 1px;
+}
+
+.footer-link {
+  color: white;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+.footer-link:hover {
+  cursor: pointer;
+  color: var(--main-color);
+}
+
+.center {
+  text-align: center;
+}
+
+.payment {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.payment > img {
+  max-width: 44px;
+  max-height: 30px;
+  width: 100%;
+}
+.socials {
+  display: flex;
+  flex-direction: row !important;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+.socials > img {
+  width: 22px;
+  height: 22px;
+}
+
+img.logo-scale {
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+/* ===============================
+             VERSIÓN TABLET 
+=============================== */
+
+@media (min-width: 768px) and (max-width: 1180px) {
+  footer {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+  }
+
+  footer > article > h4 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  img.logo-scale {
+    margin-top: 22px !important;
+  }
+  .payment {
+    justify-content: center;
+  }
+}
+
+/* ===============================
+   MOBILE — hasta 767px
+=============================== */
+@media (max-width: 767px) {
+  footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  footer > article {
+    width: 90%;
+  }
+
+  .payment {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    justify-content: center;
+    gap: 4px;
+  }
+}

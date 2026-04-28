@@ -1,0 +1,316 @@
+.product-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  background: var(--secondary-color);
+  display: flex;
+  gap: 40px;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.product-container .gallery-product,
+.product-container .details {
+  flex: 0 0 50%;
+}
+
+/* =======================
+      IZQUIERDA - GALERÍA
+======================= */
+.gallery-product {
+  width: 100%;
+}
+
+.main-image {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.thumbnails {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.thumbnails img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.thumbnails img:hover {
+  opacity: 1;
+}
+
+/* =======================
+      DERECHA - DETALLES
+======================= */
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.details h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.price-tag {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--main-color);
+  margin-bottom: 25px;
+}
+
+.info-box {
+  margin-bottom: 20px;
+}
+.info {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.info li {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.stats-pills {
+  display: flex;
+  flex-direction: column;
+}
+.stats {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.stats p {
+  margin-bottom: 6px;
+}
+
+.description-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.description {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* BOTONES */
+
+.second-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+  background: var(--main-color);
+  color: var(--secondary-color);
+  text-decoration: none;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.second-btn:hover {
+  background: var(--hover);
+  color: var(--secondary-color);
+  opacity: 0.9;
+}
+
+.second-btn:visited {
+  color: var(--secondary-color);
+}
+.overlay {
+  pointer-events: none;
+}
+
+/*  ESTILO BURBUJA FAVORITOS  */
+
+#fav-toast-bubble.toast-bubble-container {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  backdrop-filter: blur(8px);
+  color: var(--secondary-color) !important;
+  padding: 20px 40px !important;
+  border-radius: 60px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 15px !important;
+  z-index: 999999 !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  white-space: nowrap;
+  pointer-events: none;
+  animation: bubblePopEffect 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    forwards;
+}
+
+.toast-icon {
+  font-size: 1.6rem;
+}
+
+.toast-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+@keyframes bubblePopEffect {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -40%) scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.second-btn.already-fav {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+  border: 1px solid #e5e7eb;
+}
+
+/*  MODO BOOKED */
+
+.status-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f0fdf4;
+  color: #166534;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #bbf7d0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-banner i {
+  color: #22c55e;
+  font-size: 18px;
+}
+
+.second-btn.booked-status {
+  background-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.second-btn.booked-status:hover {
+  background-color: #e5e7eb;
+  opacity: 1;
+}
+
+.buy-now {
+  filter: brightness(1.1);
+}
+
+.booked-mode {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===============================
+             VERSIÓN TABLET 
+=============================== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .product-container {
+    flex-direction: column;
+    gap: 30px;
+    padding: 25px;
+  }
+
+  .main-image {
+    height: 420px;
+  }
+
+  .details h1 {
+    font-size: 28px;
+  }
+
+  .price {
+    font-size: 34px;
+  }
+
+  .info li,
+  .description {
+    font-size: 14px;
+  }
+}
+/* ===============================
+   MOBILE — hasta 767px
+=============================== */
+@media (max-width: 767px) {
+  body {
+    background: var(--secondary-color);
+  }
+
+  .product-container {
+    flex-direction: column;
+    gap: 25px;
+    margin: 0;
+    border-radius: 0;
+    padding: 20px;
+  }
+
+  .main-image {
+    height: 300px;
+    border-radius: 6px;
+  }
+
+  .thumbnails {
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .thumbnails img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .details h1 {
+    font-size: 24px;
+  }
+
+  .price {
+    font-size: 30px;
+  }
+
+  .info li {
+    font-size: 13px;
+  }
+
+  .stats {
+    font-size: 13px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+}
